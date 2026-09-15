@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <template id="__bundler_thumbnail">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" data-bg-color="#f3eee0">
+      <rect width="200" height="200" fill="#f3eee0"/>
+      <circle cx="100" cy="90" r="45" fill="none" stroke="#e2572a" stroke-width="10"/>
+      <path d="M75 95 L95 115 L130 75" fill="none" stroke="#1c6e8c" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </template>
+  <link rel="stylesheet" href="_ds/modernist-1b33bd65-cf6d-429a-8a2b-7ec2de46b696/styles.css">
+  <script src="_ds/modernist-1b33bd65-cf6d-429a-8a2b-7ec2de46b696/_ds_bundle.js"></script>
+  <script src="./image-slot.js"></script>
+  <style>
+    body { margin: 0; text-wrap: pretty; }
+    a { color: var(--color-accent); }
+    a:hover { color: var(--color-accent-700); }
+    @keyframes vbt-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* Villa Beach Tennis — responsivo. Seções de 2 colunas viram 1 coluna
+       e o cartão de localização passa de overlay flutuante para bloco
+       empilhado abaixo do mapa, evitando corte de conteúdo em telas estreitas. */
+    @media (max-width: 860px) {
+      .vbt-two-col { grid-template-columns: minmax(0,1fr) !important; }
+      .vbt-team-photo { order: 1 !important; }
+      .vbt-team-copy { order: 2 !important; }
+    }
+    @media (max-width: 640px) {
+      .vbt-services-grid { grid-template-columns: minmax(0,1fr) !important; }
+      .vbt-form-row { grid-template-columns: minmax(0,1fr) !important; }
+      .vbt-location-section { height: 760px !important; }
+      .vbt-location-card {
+        width: 92% !important;
+        grid-template-columns: minmax(0,1fr) !important;
+      }
+    }
+
+    /* Header — menu hambúrguer no mobile via checkbox (sem JS): logo + marca
+       ficam sozinhos à esquerda, links viram um dropdown, e o CTA do header
+       some (mantém só o CTA do hero). */
+    .vbt-nav-checkbox { display: none; }
+    .vbt-nav-burger { display: none; }
+    @media (max-width: 860px) {
+      .vbt-nav-cta { display: none !important; }
+      .vbt-nav-burger {
+        display: flex !important; flex-direction: column; justify-content: center; gap: 5px;
+        width: 32px; height: 32px; margin-left: auto; cursor: pointer; flex-shrink: 0;
+      }
+      .vbt-nav-burger span {
+        display: block; width: 100%; height: 2px; background: #f3eee0; border-radius: 2px;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+      .vbt-nav-checkbox:checked ~ .vbt-nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .vbt-nav-checkbox:checked ~ .vbt-nav-burger span:nth-child(2) { opacity: 0; }
+      .vbt-nav-checkbox:checked ~ .vbt-nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+      .vbt-nav-links {
+        display: none !important; flex-direction: column; gap: 2px;
+        position: absolute !important; top: 100% !important; left: 0 !important; right: 0 !important;
+        width: 100% !important; margin: 0 !important;
+        background: rgba(10,20,24,0.92); padding: 4px clamp(20px,5vw,72px) 16px;
+        box-sizing: border-box;
+      }
+      .vbt-nav-checkbox:checked ~ .vbt-nav-links { display: flex !important; }
+      .vbt-nav-links a { padding: 12px 0; border-bottom: 1px solid rgba(243,238,224,0.15); }
+      .vbt-nav:has(.vbt-nav-checkbox:checked) { background: rgba(10,20,24,0.92) !important; }
+    }
+
+    /* Reveal suave ao rolar — cada seção entra com fade + leve subida.
+       Respeita prefers-reduced-motion para quem desativa animações. */
+    .vbt-reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(.16,.8,.24,1), transform 0.7s cubic-bezier(.16,.8,.24,1);
+    }
+    .vbt-reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .vbt-reveal { transition: none !important; opacity: 1 !important; transform: none !important; }
+    }
+
+    /* Textura leve de areia — grão sutil no lugar de um bege liso. */
+    .vbt-sand-texture {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+
+    .vbt-wave { display: block; width: 100%; height: 48px; }
+    @media (max-width: 640px) { .vbt-wave { height: 28px; } }
+  </style>
+</helmet>
+<div class="vbt-sand-texture" style="--color-bg:#f3eee0; --color-surface:#eae2cd; --color-text:#211c17; --color-accent:#e2572a; --color-accent-100:#fcece1; --color-accent-200:#f7cdb0; --color-accent-300:#efab7c; --color-accent-600:#b93f18; --color-accent-700:#8a2e10; --color-accent-800:#5f1f0b; --color-accent-2:#1c6e8c; --color-accent-2-100:#e7f0f3; --color-accent-2-200:#cde3ea; --color-accent-2-300:#a4cbd8; --color-accent-2-600:#155a72; --color-accent-2-700:#0f4557; --color-accent-2-800:#0a3341; --color-divider:rgba(33,28,23,0.35); background:var(--color-bg); color:var(--color-text); font-family:var(--font-body); min-height:100vh;">
+
+  <section style="position:relative; min-height:clamp(560px,68vh,700px); display:flex; align-items:flex-end;">
+    <nav class="nav vbt-nav" style="position:absolute; top:0; left:0; right:0; z-index:2; display:flex; align-items:center; flex-wrap:wrap; row-gap:12px; column-gap:24px; padding:20px clamp(20px,5vw,72px); background:transparent; border-bottom:none; transition:background 0.2s ease;">
+      <img src="uploads/logo.png" alt="Villa Beach Tennis" style="height:44px; width:44px; flex-shrink:0;">
+      <span class="nav-brand" style="font-family:var(--font-heading); font-weight:800; font-size:19px; letter-spacing:-0.01em; color:#f3eee0; white-space:nowrap;">Arena Villa Verde</span>
+      <input type="checkbox" id="vbt-nav-toggle" class="vbt-nav-checkbox">
+      <label for="vbt-nav-toggle" class="vbt-nav-burger" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </label>
+      <div class="vbt-nav-links" style="display:flex; align-items:center; gap:24px;">
+        <a href="#sobre" style="font-size:14px; text-decoration:none; color:#f3eee0;">Sobre</a>
+        <a href="#servicos" style="font-size:14px; text-decoration:none; color:#f3eee0;">Serviços</a>
+        <a href="#contato" style="font-size:14px; text-decoration:none; color:#f3eee0;">Contato</a>
+      </div>
+      <a href="{{ ctaHref }}" target="_blank" rel="noopener" class="btn btn-primary vbt-nav-cta" style="white-space:nowrap; color:var(--color-bg); background:linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-600) 100%); border-radius:999px; box-shadow:0 4px 14px rgba(226,87,42,0.4); transition:transform 0.15s ease, box-shadow 0.15s ease;" style-hover="transform:translateY(-2px); box-shadow:0 8px 20px rgba(226,87,42,0.5);" style-active="transform:translateY(0) scale(0.96); box-shadow:0 2px 8px rgba(226,87,42,0.3);">{{ ctaLabel }}</a>
+    </nav>
+    <video ref="{{ heroVideoRef }}" src="uploads/hero-video.mp4" autoplay="{{ true }}" loop="{{ true }}" muted="{{ true }}" defaultMuted="{{ true }}" playsInline="{{ true }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
+    <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(10,20,24,0.8) 0%, rgba(10,20,24,0.62) 45%, rgba(10,20,24,0.4) 100%);"></div>
+    <div style="position: relative; z-index: 1; padding: clamp(96px,12vw,128px) clamp(20px,5vw,72px) clamp(40px,6vw,64px); color: #f3eee0; max-width: 720px; background-color: #0A141800;">
+      <img src="uploads/logo.png" alt="Villa Beach Tennis" style="height:72px; width:72px; margin-bottom:20px;">
+      <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:#cde3ea; margin-bottom:14px; font-feature-settings:'tnum' 1;">ARENA VILLA VERDE · VARGINHA-MG</span>
+<h1 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(34px,5.2vw,58px); line-height:1.1; letter-spacing:-0.02em; margin:0;"><span style="display:block; font-size:0.6em; line-height:1.3; min-height:1.3em;">O que você deseja? <span style="color:var(--color-accent);">{{ typedText }}<span style="display:inline-block; width:2px; height:0.8em; background:var(--color-accent); margin-left:4px; vertical-align:-0.1em; opacity:{{ cursorOpacity }};"></span></span></span><span style="display:block;">Seja bem-vindo</span></h1>
+      
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:24px;">
+        <a href="{{ ctaHref }}" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:16px; padding:14px 32px; color:var(--color-bg); white-space:nowrap; background:linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-600) 100%); border-radius:999px; box-shadow:0 6px 18px rgba(226,87,42,0.45); transition:transform 0.15s ease, box-shadow 0.15s ease;" style-hover="transform:translateY(-2px); box-shadow:0 10px 24px rgba(226,87,42,0.55);" style-active="transform:translateY(0) scale(0.96); box-shadow:0 3px 10px rgba(226,87,42,0.3);">{{ ctaLabel }}</a>
+      </div>
+    </div>
+    <svg class="vbt-wave" style="position:absolute; left:0; right:0; bottom:-1px; z-index:1; pointer-events:none;" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0,32 C240,58 480,4 720,20 C960,36 1200,56 1440,26 L1440,60 L0,60 Z" fill="var(--color-bg)"></path></svg>
+  </section>
+
+  <section id="sobre" class="vbt-two-col vbt-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); max-width:1200px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr); gap:48px; align-items:center;">
+    <div>
+      <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">Sobre nós</span>
+      <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(28px,3.4vw,40px); letter-spacing:-0.015em; margin:0 0 16px; max-width:26ch;">Onde a areia encontra o esporte</h2>
+      <p style="font-size:16px; line-height:1.65; max-width:52ch; color:color-mix(in srgb, var(--color-text) 80%, transparent); margin:0 0 24px;">A Arena Villa Verde&nbsp; é o point de quem quer jogar, treinar e fazer amigos na areia. Quadras cuidadas, iluminação para qualquer horário e uma comunidade que recebe todo mundo de braços abertos.</p>
+      <div style="display:flex; gap:24px; flex-wrap:wrap; border-top:2px solid var(--color-divider); padding-top:20px;">
+        <span style="display:flex; align-items:center; gap:8px; font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:0.06em; text-transform:uppercase;">
+          <span style="width:10px; height:10px; border-radius:50%; background:var(--color-accent); box-shadow:0 0 0 3px var(--color-accent-100); flex-shrink:0;"></span>Beach Tennis
+        </span>
+        <span style="display:flex; align-items:center; gap:8px; font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:0.06em; text-transform:uppercase;">
+          <span style="width:10px; height:10px; border-radius:50%; background:var(--color-accent-2); box-shadow:0 0 0 3px var(--color-accent-2-100); flex-shrink:0;"></span>Futevôlei
+        </span>
+        <span style="display:flex; align-items:center; gap:8px; font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:0.06em; text-transform:uppercase;">
+          <span style="width:10px; height:10px; border-radius:50%; background:var(--color-accent); box-shadow:0 0 0 3px var(--color-accent-100); flex-shrink:0;"></span>Vôlei de Praia
+        </span>
+      </div>
+    </div>
+    <figure style="margin:0;">
+      <image-slot id="sobre-photo" shape="rect" src="uploads/sobre-quadras.png" style="width:100%; aspect-ratio:4/3;" placeholder="Foto das quadras"></image-slot>
+    </figure>
+  </section>
+
+  <section ref="{{ statsSectionRef }}" aria-label="Villa em números" style="position:relative; overflow:hidden; min-height:320px; padding:clamp(64px,8vw,104px) clamp(20px,5vw,72px); border-top:2px solid var(--color-divider); border-bottom:2px solid var(--color-divider); display:flex; align-items:center;">
+    <div style="position:absolute; inset:0; overflow:hidden;">
+      <image-slot id="stats-bg" shape="rect" src="uploads/stats-background.png" fit="cover" style="width:100%; height:100%; transform:scale(1.06); filter:saturate(1.15);" placeholder="Foto de beach tennis (fundo)"></image-slot>
+    </div>
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(8,20,26,0.32) 0%, rgba(8,20,26,0.7) 60%, rgba(8,20,26,0.85) 100%);"></div>
+    <div style="position:relative; z-index:1; max-width:1200px; margin:0 auto; width:100%; display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:32px;">
+      <div style="opacity:{{ statsOpacity0 }}; transform:translateY({{ statsOffset0 }}px); transition:opacity 0.6s ease, transform 0.6s ease;">
+        <p style="font-family:var(--font-heading); font-weight:800; font-size:clamp(32px,3.4vw,46px); color:var(--color-accent); margin:0;">{{ countQuadras }}</p>
+        <p style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(243,238,224,0.85); margin:8px 0 0;">Quadras de areia</p>
+      </div>
+      <div style="opacity:{{ statsOpacity1 }}; transform:translateY({{ statsOffset1 }}px); transition:opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;">
+        <p style="font-family:var(--font-heading); font-weight:800; font-size:clamp(32px,3.4vw,46px); color:var(--color-accent); margin:0;">{{ countModalidades }}</p>
+        <p style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(243,238,224,0.85); margin:8px 0 0;">Modalidades</p>
+      </div>
+      <div style="opacity:{{ statsOpacity2 }}; transform:translateY({{ statsOffset2 }}px); transition:opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;">
+        <p style="font-family:var(--font-heading); font-weight:800; font-size:clamp(32px,3.4vw,46px); color:var(--color-accent); margin:0;">{{ countAlunos }}</p>
+        <p style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(243,238,224,0.85); margin:8px 0 0;">Alunos satisfeitos</p>
+      </div>
+      <div style="opacity:{{ statsOpacity3 }}; transform:translateY({{ statsOffset3 }}px); transition:opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;">
+        <p style="font-family:var(--font-heading); font-weight:800; font-size:clamp(32px,3.4vw,46px); color:var(--color-accent); margin:0;">{{ countEventos }}</p>
+        <p style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(243,238,224,0.85); margin:8px 0 0;">Eventos por ano</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos" class="vbt-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); max-width:1200px; margin:0 auto;">
+    <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">O que oferecemos</span>
+    <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(28px,3.4vw,40px); letter-spacing:-0.015em; margin:0 0 40px; max-width:32ch;">Serviços feitos para você jogar mais</h2>
+    <div class="vbt-services-grid" style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; align-items:stretch;">
+      <div class="elev-sm" style="position:relative; background:var(--color-bg); border:1px solid var(--color-divider); padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%; transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;" style-hover="transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--color-accent);">
+        <span style="position:absolute; top:16px; right:18px; z-index:1; font-family:var(--font-heading); font-weight:800; font-size:13px; color:#fff; background:rgba(10,20,24,0.5); padding:2px 8px; font-feature-settings:'tnum' 1;">01</span>
+        <div style="width:100%; aspect-ratio:4/3; overflow:hidden; transition:transform 0.4s ease;" style-hover="transform:scale(1.06);">
+          <image-slot id="servico-aulas-photo" shape="rect" src="uploads/servico-aulas.jpg" style="width:100%; height:100%;" placeholder="Foto de aulas"></image-slot>
+        </div>
+        <div style="padding:20px 24px 28px; flex:1; display:flex; flex-direction:column;">
+          <h3 class="card-title">Aulas particulares e em grupo</h3>
+          <p class="card-body">Turmas para todos os níveis, do primeiro saque à competição, com professores certificados e planos flexíveis.</p>
+        </div>
+      </div>
+      <div class="elev-sm" style="position:relative; background:var(--color-bg); border:1px solid var(--color-divider); padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%; transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;" style-hover="transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--color-accent-2);">
+        <span style="position:absolute; top:16px; right:18px; z-index:1; font-family:var(--font-heading); font-weight:800; font-size:13px; color:#fff; background:rgba(10,20,24,0.5); padding:2px 8px; font-feature-settings:'tnum' 1;">02</span>
+        <div style="width:100%; aspect-ratio:4/3; overflow:hidden; transition:transform 0.4s ease;" style-hover="transform:scale(1.06);">
+          <image-slot id="servico-aluguel-photo" shape="rect" src="uploads/servico-aluguel.jpg" style="width:100%; height:100%;" placeholder="Foto de aluguel de quadra"></image-slot>
+        </div>
+        <div style="padding:20px 24px 28px; flex:1; display:flex; flex-direction:column;">
+          <h3 class="card-title">Aluguel de quadra</h3>
+          <p class="card-body">Reserve horário por app ou WhatsApp, com equipamentos disponíveis para locação na hora.</p>
+        </div>
+      </div>
+      <div class="elev-sm" style="position:relative; background:var(--color-bg); border:1px solid var(--color-divider); padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%; transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;" style-hover="transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--color-accent);">
+        <span style="position:absolute; top:16px; right:18px; z-index:1; font-family:var(--font-heading); font-weight:800; font-size:13px; color:#fff; background:rgba(10,20,24,0.5); padding:2px 8px; font-feature-settings:'tnum' 1;">03</span>
+        <div style="width:100%; aspect-ratio:4/3; overflow:hidden; transition:transform 0.4s ease;" style-hover="transform:scale(1.06);">
+          <image-slot id="servico-eventos-photo" shape="rect" src="uploads/servico-eventos.png" style="width:100%; height:100%;" placeholder="Foto de evento/torneio"></image-slot>
+        </div>
+        <div style="padding:20px 24px 28px; flex:1; display:flex; flex-direction:column;">
+          <h3 class="card-title">Eventos e torneios</h3>
+          <p class="card-body">Torneios abertos, confraternizações e eventos privados com estrutura completa de arbitragem e som.</p>
+        </div>
+      </div>
+      <div class="elev-sm" style="position:relative; background:var(--color-bg); border:1px solid var(--color-divider); padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%; transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;" style-hover="transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--color-accent-2);">
+        <span style="position:absolute; top:16px; right:18px; z-index:1; font-family:var(--font-heading); font-weight:800; font-size:13px; color:#fff; background:rgba(10,20,24,0.5); padding:2px 8px; font-feature-settings:'tnum' 1;">04</span>
+        <div style="width:100%; aspect-ratio:4/3; overflow:hidden; transition:transform 0.4s ease;" style-hover="transform:scale(1.06);">
+          <image-slot id="servico-festas-photo" shape="rect" src="uploads/servico-festas.jpg" style="width:100%; height:100%;" placeholder="Foto de festa de aniversário"></image-slot>
+        </div>
+        <div style="padding:20px 24px 28px; flex:1; display:flex; flex-direction:column;">
+          <h3 class="card-title">Festas de aniversário</h3>
+          <p class="card-body">Reserve o espaço para comemorar com a turma: quadra, estrutura e clima de praia para a sua festa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="vbt-two-col vbt-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); max-width:1200px; margin:0 auto; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); gap:48px; align-items:center; border-top:2px solid var(--color-divider);">
+    <figure class="vbt-team-photo" style="margin:0; order:2;">
+      <image-slot id="team-photo" shape="rect" src="uploads/team-instrutor.jpg" fit="cover" style="width:100%; aspect-ratio:4/3;" placeholder="Foto da equipe de instrutores"></image-slot>
+    </figure>
+    <div class="vbt-team-copy" style="order:1;">
+      <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">Nossa equipe</span>
+      <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(26px,3vw,36px); letter-spacing:-0.015em; margin:0 0 16px; max-width:26ch;">Instrutores prontos para te ensinar</h2>
+      <p style="font-size:16px; line-height:1.65; max-width:50ch; color:color-mix(in srgb, var(--color-text) 80%, transparent); margin:0;">Nossas aulas de beach tennis, vôlei e futevôlei combinam diversão ao sol com treino técnico de verdade. Professores certificados acompanham cada turma, do primeiro saque à competição.</p>
+    </div>
+  </section>
+
+  <sc-if value="{{ showTestimonials }}" hint-placeholder-val="{{ true }}">
+    <section id="depoimentos" class="vbt-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); background:var(--color-surface); border-top:2px solid var(--color-divider); border-bottom:2px solid var(--color-divider);">
+      <div style="max-width:1200px; margin:0 auto;">
+        <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">Quem já jogou com a gente</span>
+        <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(28px,3.4vw,40px); letter-spacing:-0.015em; margin:0 0 40px; max-width:32ch;">Depoimentos de exemplo — troque pelos reais quando tiver</h2>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px;">
+          <figure style="margin:0;">
+            <blockquote style="font-family:var(--font-heading); font-weight:800; font-size:19px; line-height:1.5; letter-spacing:-0.01em; margin:0 0 16px;">"Entrei pra fazer aula e hoje é onde encontro meus amigos toda semana. Ambiente acolhedor de verdade."</blockquote>
+            <figcaption style="display:flex; align-items:center; gap:12px; font-size:14px; color:color-mix(in srgb, var(--color-text) 70%, transparent);">
+              <image-slot id="quote-1" shape="circle" style="width:40px; height:40px; flex-shrink:0;" placeholder="Foto"></image-slot>
+              Camila R., aluna há 2 anos
+            </figcaption>
+          </figure>
+          <figure style="margin:0;">
+            <blockquote style="font-family:var(--font-heading); font-weight:800; font-size:19px; line-height:1.5; letter-spacing:-0.01em; margin:0 0 16px;">"As quadras são impecáveis e sempre tem gente disposta a formar dupla. Virou parte da minha rotina."</blockquote>
+            <figcaption style="display:flex; align-items:center; gap:12px; font-size:14px; color:color-mix(in srgb, var(--color-text) 70%, transparent);">
+              <image-slot id="quote-2" shape="circle" style="width:40px; height:40px; flex-shrink:0;" placeholder="Foto"></image-slot>
+              Rafael M., jogador de futevôlei
+            </figcaption>
+          </figure>
+          <figure style="margin:0;">
+            <blockquote style="font-family:var(--font-heading); font-weight:800; font-size:19px; line-height:1.5; letter-spacing:-0.01em; margin:0 0 16px;">"Fizemos nosso torneio de confraternização na Villa e foi impecável, do som à arbitragem. Já reservamos o próximo."</blockquote>
+            <figcaption style="display:flex; align-items:center; gap:12px; font-size:14px; color:color-mix(in srgb, var(--color-text) 70%, transparent);">
+              <image-slot id="quote-3" shape="circle" style="width:40px; height:40px; flex-shrink:0;" placeholder="Foto"></image-slot>
+              Fernanda A., organizadora de evento
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <section id="localizacao" class="vbt-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px) 0; max-width:1200px; margin:0 auto; text-align:left;">
+    <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">Localização</span>
+    <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(28px,3.4vw,40px); letter-spacing:-0.015em; margin:0 0 8px;">Como chegar</h2>
+    <p style="font-size:16px; line-height:1.6; margin:0 0 32px; color:color-mix(in srgb, var(--color-text) 78%, transparent);">Confira as informações do local.</p>
+  </section>
+
+  <section class="vbt-location-section" style="position:relative; height:clamp(420px,62vw,640px); width:100%; overflow:hidden; background:var(--color-surface);">
+    <div class="vbt-location-map" style="position:absolute; inset:0; width:100%; height:100%;">
+      <iframe title="Mapa — Av. José Soares de Alcântara, 109, Vila Verde, Varginha - MG" src="https://www.google.com/maps?q=Av.+Jos%C3%A9+Soares+de+Alc%C3%A2ntara%2C+109+-+Vila+Verde%2C+Varginha+-+MG%2C+37072-015&output=embed" style="border:0; width:100%; height:100%; display:block;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen="{{ true }}"></iframe>
+    </div>
+    <div class="vbt-location-card" style="position:absolute; top:6%; left:50%; transform:translateX(-50%); width:min(680px,92%); display:grid; grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr); background:var(--color-text); box-shadow:var(--shadow-lg);">
+      <image-slot id="location-photo" shape="rect" src="uploads/location-facade.png" style="width:100%; height:100%; min-height:220px;" placeholder="Foto da fachada / quadras"></image-slot>
+      <div style="padding:clamp(24px,3vw,36px); color:var(--color-bg); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:10px; height:100%;">
+        <img src="uploads/logo.png" alt="Villa Beach Tennis" style="width:44px; height:44px; margin-bottom:6px;">
+        <span style="display:block; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-300);">Endereço</span>
+        <p style="font-size:17px; line-height:1.5; margin:0; font-weight:600;">Av. José Soares de Alcântara, 109</p>
+        <p style="font-size:14px; line-height:1.5; margin:0; color:rgba(243,238,224,0.75);">Vila Verde, Varginha - MG</p>
+        <p style="font-size:13px; line-height:1.5; margin:0 0 10px; color:rgba(243,238,224,0.55);">CEP: 37072-015</p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Av.%20Jos%C3%A9%20Soares%20de%20Alc%C3%A2ntara%2C%20109%20-%20Vila%20Verde%2C%20Varginha%20-%20MG%2C%2037072-015" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center;">Pegue a localização →</a>
+      </div>
+      <div class="vbt-location-pointer" style="position:absolute; left:50%; bottom:-16px; transform:translateX(-50%); width:0; height:0; border-left:16px solid transparent; border-right:16px solid transparent; border-top:16px solid var(--color-text);"></div>
+    </div>
+  </section>
+
+  <section id="contato" class="vbt-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); max-width:1200px; margin:0 auto;">
+    <div style="text-align:left; margin-bottom:40px;">
+      <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">Fale com a gente</span>
+      <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(26px,3vw,34px); letter-spacing:-0.015em; margin:0; max-width:24ch;">Alguma dúvida? Entre em contato</h2>
+    </div>
+    <div class="vbt-two-col" style="display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,0.8fr); gap:48px; align-items:start;">
+      <form onSubmit="{{ onContactSubmit }}" style="display:grid; gap:16px;">
+        <div class="vbt-form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div class="field">
+            <label for="contact-nome">Nome</label>
+            <input id="contact-nome" class="input" type="text" value="{{ contactForm.nome }}" onChange="{{ onContactField('nome') }}" required="{{ true }}">
+          </div>
+          <div class="field">
+            <label for="contact-telefone">Telefone</label>
+            <input id="contact-telefone" class="input" type="tel" inputMode="numeric" maxLength="15" placeholder="(35) 90000-0000" value="{{ contactForm.telefone }}" onChange="{{ onContactPhoneChange }}" required="{{ true }}">
+          </div>
+        </div>
+        <div class="field">
+          <label for="contact-email">E-mail</label>
+          <input id="contact-email" class="input" type="email" value="{{ contactForm.email }}" onChange="{{ onContactField('email') }}">
+        </div>
+        <div class="field">
+          <label for="contact-mensagem">Mensagem</label>
+          <textarea id="contact-mensagem" class="input" rows="4" style="resize:vertical; font-family:inherit;" value="{{ contactForm.mensagem }}" onChange="{{ onContactField('mensagem') }}" required="{{ true }}"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" style="justify-content:center; background:linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-600) 100%); border-radius:999px; padding:14px 0; color:var(--color-bg);">Enviar mensagem pelo WhatsApp</button>
+      </form>
+      <div style="display:grid; gap:20px;">
+        <div>
+          <p style="font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; color:var(--color-accent-700); margin:0 0 6px;">Horário</p>
+          <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent); white-space:nowrap;">Seg a Dom · 7h às 23h</p>
+        </div>
+        <a href="{{ whatsappHref }}" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:16px; text-decoration:none; color:var(--color-text);" style-hover="opacity:0.7;">
+          <svg width="40" height="40" viewBox="0 0 32 32" fill="#25D366" style="flex-shrink:0;"><path d="M16.001 3C9.099 3 3.5 8.6 3.5 15.5c0 2.55.75 4.92 2.03 6.9L3 29l6.77-2.48A12.4 12.4 0 0016 28c6.9 0 12.5-5.6 12.5-12.5S22.9 3 16 3zm0 22.7c-2.13 0-4.13-.58-5.86-1.6l-.42-.25-4.22 1.55 1.53-4.1-.27-.42a10.16 10.16 0 01-1.66-5.55C5.11 9.83 9.94 5 16 5s10.89 4.83 10.89 10.5S22.06 25.7 16 25.7z"></path><path d="M22.3 18.73c-.34-.17-2-.99-2.31-1.1-.31-.11-.53-.17-.76.17-.22.34-.86 1.1-1.05 1.32-.19.22-.39.25-.72.08-1.94-.97-3.21-1.73-4.49-3.92-.34-.58.34-.54.97-1.8.11-.22.06-.41-.03-.58-.09-.17-.66-1.6-.91-2.19-.24-.58-.49-.5-.68-.5-.17-.01-.38-.01-.58-.01-.2 0-.53.08-.81.39-.28.31-1.06 1.04-1.06 2.53s1.09 2.94 1.24 3.14c.15.2 2.06 3.15 5.06 4.29 2.51.95 3.02.76 3.57.71.55-.05 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.3-.2-.63-.34z"></path></svg>
+          <div>
+            <p style="font-family:var(--font-heading); font-weight:800; font-size:15px; margin:0 0 3px; color:var(--color-text);">WhatsApp</p>
+            <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent);">(35) 99866-8742</p>
+          </div>
+        </a>
+        <a href="{{ instagramHref }}" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:16px; text-decoration:none; color:var(--color-text);" style-hover="opacity:0.7;">
+          <svg width="38" height="38" viewBox="0 0 24 24" style="flex-shrink:0;"><defs><radialGradient id="igGrad" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"></stop><stop offset="5%" stop-color="#fdf497"></stop><stop offset="45%" stop-color="#fd5949"></stop><stop offset="60%" stop-color="#d6249f"></stop><stop offset="90%" stop-color="#285AEB"></stop></radialGradient></defs><rect x="2" y="2" width="20" height="20" rx="5.5" fill="url(#igGrad)"></rect><circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" stroke-width="1.8"></circle><circle cx="17.2" cy="6.8" r="0.9" fill="#fff"></circle></svg>
+          <div>
+            <p style="font-family:var(--font-heading); font-weight:800; font-size:15px; margin:0 0 3px; color:var(--color-text);">Instagram</p>
+            <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent);">@arena.villaverde</p>
+          </div>
+        </a>
+        <a href="{{ facebookHref }}" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:16px; text-decoration:none; color:var(--color-text);" style-hover="opacity:0.7;">
+          <svg width="38" height="38" viewBox="0 0 24 24" style="flex-shrink:0;"><rect x="2" y="2" width="20" height="20" rx="5.5" fill="#1877F2"></rect><path d="M15.5 8.5h-1.3c-.5 0-.7.25-.7.75V10.5h2l-.25 2h-1.75v6h-2.2v-6H9.5v-2h1.8V8.9c0-1.65.9-2.9 2.6-2.9h1.6v2.5z" fill="#fff"></path></svg>
+          <div>
+            <p style="font-family:var(--font-heading); font-weight:800; font-size:15px; margin:0 0 3px; color:var(--color-text);">Facebook</p>
+            <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent);">Arena Villa Verde</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <footer style="border-top:2px solid var(--color-divider); padding:32px clamp(20px,5vw,72px); max-width:1200px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center;">
+    <img src="uploads/logo.png" alt="Villa Beach Tennis" style="height:48px; width:48px;">
+    <p style="font-size:13px; color:color-mix(in srgb, var(--color-text) 70%, transparent); margin:0;">© 2026 Arena Villa Verde | Todos os direitos reservados.</p>
+  </footer>
+
+  <a href="{{ whatsappHref }}" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" style="position:fixed; bottom:24px; right:24px; z-index:50; width:60px; height:60px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,0.3); transition:transform 0.15s ease, box-shadow 0.15s ease;" style-hover="transform:scale(1.08); box-shadow:0 10px 24px rgba(0,0,0,0.4);" style-active="transform:scale(0.94);">
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="#fff"><path d="M16.001 3C9.099 3 3.5 8.6 3.5 15.5c0 2.55.75 4.92 2.03 6.9L3 29l6.77-2.48A12.4 12.4 0 0016 28c6.9 0 12.5-5.6 12.5-12.5S22.9 3 16 3zm0 22.7c-2.13 0-4.13-.58-5.86-1.6l-.42-.25-4.22 1.55 1.53-4.1-.27-.42a10.16 10.16 0 01-1.66-5.55C5.11 9.83 9.94 5 16 5s10.89 4.83 10.89 10.5S22.06 25.7 16 25.7z"></path><path d="M22.3 18.73c-.34-.17-2-.99-2.31-1.1-.31-.11-.53-.17-.76.17-.22.34-.86 1.1-1.05 1.32-.19.22-.39.25-.72.08-1.94-.97-3.21-1.73-4.49-3.92-.34-.58.34-.54.97-1.8.11-.22.06-.41-.03-.58-.09-.17-.66-1.6-.91-2.19-.24-.58-.49-.5-.68-.5-.17-.01-.38-.01-.58-.01-.2 0-.53.08-.81.39-.28.31-1.06 1.04-1.06 2.53s1.09 2.94 1.24 3.14c.15.2 2.06 3.15 5.06 4.29 2.51.95 3.02.76 3.57.71.55-.05 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.3-.2-.63-.34z"></path></svg>
+  </a>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280},&quot;showTestimonials&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo&quot;},&quot;ctaChannel&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;whatsapp&quot;,&quot;options&quot;:[&quot;whatsapp&quot;,&quot;telefone&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contato&quot;}}">
+class Component extends DCLogic {
+  heroVideoRef = React.createRef();
+  typedWords = ['Vôlei', 'Futevôlei', 'Beach Tennis'];
+  statsSectionRef = React.createRef();
+  statsTargets = { quadras: 1, modalidades: 3, alunos: 1200, eventos: 80 };
+  state = { typedText: '', cursorOn: true, statsPlayed: false, countQuadras: 0, countModalidades: 0, countAlunos: 0, countEventos: 0, contactForm: { nome: '', telefone: '', email: '', mensagem: '' } };
+  onContactField(field) {
+    return (e) => this.setState(s => ({ contactForm: { ...s.contactForm, [field]: e.target.value } }));
+  }
+  onContactPhoneChange(e) {
+    const digits = e.target.value.replace(/\D/g, '').slice(0, 11);
+    let formatted = digits;
+    if (digits.length > 10) formatted = digits.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+    else if (digits.length > 6) formatted = digits.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    else if (digits.length > 2) formatted = digits.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+    else if (digits.length > 0) formatted = digits.replace(/(\d{0,2})/, '($1');
+    this.setState(s => ({ contactForm: { ...s.contactForm, telefone: formatted.replace(/-$/, '').trim() } }));
+  }
+  onContactSubmit(e) {
+    e.preventDefault();
+    const f = this.state.contactForm;
+    const lines = [
+      'Olá! Vim pelo site da Villa Beach Tennis.',
+      'Nome: ' + f.nome,
+      'Telefone: ' + f.telefone,
+      f.email ? ('E-mail: ' + f.email) : null,
+      'Mensagem: ' + f.mensagem
+    ].filter(Boolean).join('\n');
+    window.open('https://wa.me/5535998668742?text=' + encodeURIComponent(lines), '_blank');
+  }
+  animateStats() {
+    if (this.state.statsPlayed) return;
+    this.setState({ statsPlayed: true });
+    const start = performance.now();
+    const duration = 1300;
+    const tick = (now) => {
+      const p = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      this.setState({
+        countQuadras: Math.round(this.statsTargets.quadras * eased),
+        countModalidades: Math.round(this.statsTargets.modalidades * eased),
+        countAlunos: Math.round(this.statsTargets.alunos * eased),
+        countEventos: Math.round(this.statsTargets.eventos * eased)
+      });
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+  componentDidMount() {
+    if (this.statsSectionRef.current) {
+      this.statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) this.animateStats(); });
+      }, { threshold: 0.35 });
+      this.statsObserver.observe(this.statsSectionRef.current);
+    }
+    if (this.heroVideoRef.current) {
+      const v = this.heroVideoRef.current;
+      v.muted = true;
+      v.loop = true;
+      v.addEventListener('ended', () => { v.currentTime = 0; v.play(); });
+      const tryPlay = () => v.play().catch(() => {});
+      tryPlay();
+      v.addEventListener('canplay', tryPlay, { once: true });
+      v.addEventListener('loadeddata', tryPlay, { once: true });
+    }
+    this.wordIndex = 0;
+    this.charIndex = 0;
+    this.deleting = false;
+    this.scheduleTyping();
+    this.cursorTimer = setInterval(() => this.setState(s => ({ cursorOn: !s.cursorOn })), 500);
+
+    const revealTargets = document.querySelectorAll('.vbt-reveal');
+    if (revealTargets.length) {
+      this.revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            this.revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+      revealTargets.forEach((el) => this.revealObserver.observe(el));
+    }
+  }
+  componentWillUnmount() {
+    clearTimeout(this.typingTimer);
+    clearInterval(this.cursorTimer);
+    if (this.statsObserver) this.statsObserver.disconnect();
+    if (this.revealObserver) this.revealObserver.disconnect();
+  }
+  scheduleTyping() {
+    const word = this.typedWords[this.wordIndex];
+    let delay = 90;
+    if (!this.deleting) {
+      this.charIndex++;
+      if (this.charIndex >= word.length) { this.deleting = true; delay = 1400; }
+    } else {
+      this.charIndex--;
+      if (this.charIndex <= 0) { this.deleting = false; this.wordIndex = (this.wordIndex + 1) % this.typedWords.length; delay = 300; }
+    }
+    this.setState({ typedText: word.slice(0, Math.max(this.charIndex, 0)) });
+    this.typingTimer = setTimeout(() => this.scheduleTyping(), delay);
+  }
+  renderVals() {
+    const showTestimonials = this.props.showTestimonials ?? true;
+    const ctaChannel = this.props.ctaChannel ?? 'whatsapp';
+    const whatsappHref = 'https://wa.me/5535998668742?text=' + encodeURIComponent('Oi! Quero saber mais sobre a Villa Beach Tennis.');
+    const instagramHref = 'https://www.instagram.com/arena.villaverde/';
+    const facebookHref = 'https://www.facebook.com/p/Arena-Villa-Verde-61569492670767/';
+    const telHref = 'tel:+5535998668742';
+    const ctaLabel = ctaChannel === 'telefone' ? 'Ligar agora' : 'Reserve agora';
+    const ctaHref = ctaChannel === 'telefone' ? telHref : whatsappHref;
+    const played = this.state.statsPlayed;
+    return {
+      showTestimonials, ctaLabel, ctaHref, whatsappHref, instagramHref, facebookHref, heroVideoRef: this.heroVideoRef,
+      contactForm: this.state.contactForm,
+      onContactField: (field) => this.onContactField(field),
+      onContactPhoneChange: (e) => this.onContactPhoneChange(e),
+      onContactSubmit: (e) => this.onContactSubmit(e),
+      typedText: this.state.typedText, cursorOpacity: this.state.cursorOn ? 1 : 0,
+      statsSectionRef: this.statsSectionRef,
+      countQuadras: this.state.countQuadras, countModalidades: this.state.countModalidades,
+      countAlunos: this.state.countAlunos.toLocaleString('pt-BR') + '+', countEventos: this.state.countEventos + '+',
+      statsOpacity0: played ? 1 : 0, statsOffset0: played ? 0 : 20,
+      statsOpacity1: played ? 1 : 0, statsOffset1: played ? 0 : 20,
+      statsOpacity2: played ? 1 : 0, statsOffset2: played ? 0 : 20,
+      statsOpacity3: played ? 1 : 0, statsOffset3: played ? 0 : 20
+    };
+  }
+}
+
+</script>
+</body>
+</html>

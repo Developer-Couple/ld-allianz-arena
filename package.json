@@ -1,0 +1,11 @@
+{
+  "name": "villa-beach-tennis-landing-page",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "responsive-check": "node scripts/responsive-check.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}
