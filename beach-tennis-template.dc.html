@@ -24,7 +24,7 @@
     a:hover { color: var(--color-accent-700); }
     @keyframes vbt-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    /* Villa Beach Tennis — responsivo. Seções de 2 colunas viram 1 coluna
+    /* Template Beach Tennis — responsivo. Seções de 2 colunas viram 1 coluna
        e o cartão de localização passa de overlay flutuante para bloco
        empilhado abaixo do mapa, evitando corte de conteúdo em telas estreitas. */
     @media (max-width: 860px) {
@@ -97,8 +97,8 @@
 
   <section style="position:relative; min-height:clamp(560px,68vh,700px); display:flex; align-items:flex-end;">
     <nav class="nav vbt-nav" style="position:absolute; top:0; left:0; right:0; z-index:2; display:flex; align-items:center; flex-wrap:wrap; row-gap:12px; column-gap:24px; padding:20px clamp(20px,5vw,72px); background:transparent; border-bottom:none; transition:background 0.2s ease;">
-      <img src="uploads/logo.png" alt="Villa Beach Tennis" style="height:44px; width:44px; flex-shrink:0;">
-      <span class="nav-brand" style="font-family:var(--font-heading); font-weight:800; font-size:19px; letter-spacing:-0.01em; color:#f3eee0; white-space:nowrap;">Arena Villa Verde</span>
+      <svg viewBox="0 0 64 64" width="44" height="44" style="flex-shrink:0;" aria-label="Logo do clube" role="img"><circle cx="32" cy="32" r="30" fill="var(--color-bg)" stroke="var(--color-accent)" stroke-width="4"/><path d="M20 34 L29 43 L45 23" fill="none" stroke="var(--color-accent-2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="nav-brand" style="font-family:var(--font-heading); font-weight:800; font-size:19px; letter-spacing:-0.01em; color:#f3eee0; white-space:nowrap;">[Nome do Clube]</span>
       <input type="checkbox" id="vbt-nav-toggle" class="vbt-nav-checkbox">
       <label for="vbt-nav-toggle" class="vbt-nav-burger" aria-label="Abrir menu">
         <span></span><span></span><span></span>
@@ -110,11 +110,12 @@
       </div>
       <a href="{{ ctaHref }}" target="_blank" rel="noopener" class="btn btn-primary vbt-nav-cta" style="white-space:nowrap; color:var(--color-bg); background:linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-600) 100%); border-radius:999px; box-shadow:0 4px 14px rgba(226,87,42,0.4); transition:transform 0.15s ease, box-shadow 0.15s ease;" style-hover="transform:translateY(-2px); box-shadow:0 8px 20px rgba(226,87,42,0.5);" style-active="transform:translateY(0) scale(0.96); box-shadow:0 2px 8px rgba(226,87,42,0.3);">{{ ctaLabel }}</a>
     </nav>
-    <video ref="{{ heroVideoRef }}" src="uploads/hero-video.mp4" autoplay="{{ true }}" loop="{{ true }}" muted="{{ true }}" defaultMuted="{{ true }}" playsInline="{{ true }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></video>
+    <!-- Troque por um <video> ou <image-slot> com foto/vídeo real da quadra. -->
+    <div style="position:absolute; inset:0; width:100%; height:100%; background:linear-gradient(135deg, var(--color-accent-800) 0%, var(--color-accent-2-800) 100%);"></div>
     <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(10,20,24,0.8) 0%, rgba(10,20,24,0.62) 45%, rgba(10,20,24,0.4) 100%);"></div>
     <div style="position: relative; z-index: 1; padding: clamp(96px,12vw,128px) clamp(20px,5vw,72px) clamp(40px,6vw,64px); color: #f3eee0; max-width: 720px; background-color: #0A141800;">
-      <img src="uploads/logo.png" alt="Villa Beach Tennis" style="height:72px; width:72px; margin-bottom:20px;">
-      <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:#cde3ea; margin-bottom:14px; font-feature-settings:'tnum' 1;">ARENA VILLA VERDE · VARGINHA-MG</span>
+      <svg viewBox="0 0 64 64" width="72" height="72" style="flex-shrink:0; margin-bottom:20px;" aria-label="Logo do clube" role="img"><circle cx="32" cy="32" r="30" fill="var(--color-bg)" stroke="var(--color-accent)" stroke-width="4"/><path d="M20 34 L29 43 L45 23" fill="none" stroke="var(--color-accent-2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:#cde3ea; margin-bottom:14px; font-feature-settings:'tnum' 1;">[NOME DO CLUBE] · [CIDADE-UF]</span>
 <h1 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(34px,5.2vw,58px); line-height:1.1; letter-spacing:-0.02em; margin:0;"><span style="display:block; font-size:0.6em; line-height:1.3; min-height:1.3em;">O que você deseja? <span style="color:var(--color-accent);">{{ typedText }}<span style="display:inline-block; width:2px; height:0.8em; background:var(--color-accent); margin-left:4px; vertical-align:-0.1em; opacity:{{ cursorOpacity }};"></span></span></span><span style="display:block;">Seja bem-vindo</span></h1>
       
       <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:24px;">
@@ -128,7 +129,7 @@
     <div>
       <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">Sobre nós</span>
       <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(28px,3.4vw,40px); letter-spacing:-0.015em; margin:0 0 16px; max-width:26ch;">Onde a areia encontra o esporte</h2>
-      <p style="font-size:16px; line-height:1.65; max-width:52ch; color:color-mix(in srgb, var(--color-text) 80%, transparent); margin:0 0 24px;">A Arena Villa Verde&nbsp; é o point de quem quer jogar, treinar e fazer amigos na areia. Quadras cuidadas, iluminação para qualquer horário e uma comunidade que recebe todo mundo de braços abertos.</p>
+      <p style="font-size:16px; line-height:1.65; max-width:52ch; color:color-mix(in srgb, var(--color-text) 80%, transparent); margin:0 0 24px;">A [Nome do Clube]&nbsp; é o point de quem quer jogar, treinar e fazer amigos na areia. Quadras cuidadas, iluminação para qualquer horário e uma comunidade que recebe todo mundo de braços abertos.</p>
       <div style="display:flex; gap:24px; flex-wrap:wrap; border-top:2px solid var(--color-divider); padding-top:20px;">
         <span style="display:flex; align-items:center; gap:8px; font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:0.06em; text-transform:uppercase;">
           <span style="width:10px; height:10px; border-radius:50%; background:var(--color-accent); box-shadow:0 0 0 3px var(--color-accent-100); flex-shrink:0;"></span>Beach Tennis
@@ -142,13 +143,13 @@
       </div>
     </div>
     <figure style="margin:0;">
-      <image-slot id="sobre-photo" shape="rect" src="uploads/sobre-quadras.png" style="width:100%; aspect-ratio:4/3;" placeholder="Foto das quadras"></image-slot>
+      <image-slot id="sobre-photo" shape="rect" style="width:100%; aspect-ratio:4/3;" placeholder="Foto das quadras"></image-slot>
     </figure>
   </section>
 
   <section ref="{{ statsSectionRef }}" aria-label="Villa em números" style="position:relative; overflow:hidden; min-height:320px; padding:clamp(64px,8vw,104px) clamp(20px,5vw,72px); border-top:2px solid var(--color-divider); border-bottom:2px solid var(--color-divider); display:flex; align-items:center;">
     <div style="position:absolute; inset:0; overflow:hidden;">
-      <image-slot id="stats-bg" shape="rect" src="uploads/stats-background.png" fit="cover" style="width:100%; height:100%; transform:scale(1.06); filter:saturate(1.15);" placeholder="Foto de beach tennis (fundo)"></image-slot>
+      <image-slot id="stats-bg" shape="rect" fit="cover" style="width:100%; height:100%; transform:scale(1.06); filter:saturate(1.15);" placeholder="Foto de beach tennis (fundo)"></image-slot>
     </div>
     <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(8,20,26,0.32) 0%, rgba(8,20,26,0.7) 60%, rgba(8,20,26,0.85) 100%);"></div>
     <div style="position:relative; z-index:1; max-width:1200px; margin:0 auto; width:100%; display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:32px;">
@@ -178,7 +179,7 @@
       <div class="elev-sm" style="position:relative; background:var(--color-bg); border:1px solid var(--color-divider); padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%; transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;" style-hover="transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--color-accent);">
         <span style="position:absolute; top:16px; right:18px; z-index:1; font-family:var(--font-heading); font-weight:800; font-size:13px; color:#fff; background:rgba(10,20,24,0.5); padding:2px 8px; font-feature-settings:'tnum' 1;">01</span>
         <div style="width:100%; aspect-ratio:4/3; overflow:hidden; transition:transform 0.4s ease;" style-hover="transform:scale(1.06);">
-          <image-slot id="servico-aulas-photo" shape="rect" src="uploads/servico-aulas.jpg" style="width:100%; height:100%;" placeholder="Foto de aulas"></image-slot>
+          <image-slot id="servico-aulas-photo" shape="rect" style="width:100%; height:100%;" placeholder="Foto de aulas"></image-slot>
         </div>
         <div style="padding:20px 24px 28px; flex:1; display:flex; flex-direction:column;">
           <h3 class="card-title">Aulas particulares e em grupo</h3>
@@ -188,7 +189,7 @@
       <div class="elev-sm" style="position:relative; background:var(--color-bg); border:1px solid var(--color-divider); padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%; transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;" style-hover="transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--color-accent-2);">
         <span style="position:absolute; top:16px; right:18px; z-index:1; font-family:var(--font-heading); font-weight:800; font-size:13px; color:#fff; background:rgba(10,20,24,0.5); padding:2px 8px; font-feature-settings:'tnum' 1;">02</span>
         <div style="width:100%; aspect-ratio:4/3; overflow:hidden; transition:transform 0.4s ease;" style-hover="transform:scale(1.06);">
-          <image-slot id="servico-aluguel-photo" shape="rect" src="uploads/servico-aluguel.jpg" style="width:100%; height:100%;" placeholder="Foto de aluguel de quadra"></image-slot>
+          <image-slot id="servico-aluguel-photo" shape="rect" style="width:100%; height:100%;" placeholder="Foto de aluguel de quadra"></image-slot>
         </div>
         <div style="padding:20px 24px 28px; flex:1; display:flex; flex-direction:column;">
           <h3 class="card-title">Aluguel de quadra</h3>
@@ -198,7 +199,7 @@
       <div class="elev-sm" style="position:relative; background:var(--color-bg); border:1px solid var(--color-divider); padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%; transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;" style-hover="transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--color-accent);">
         <span style="position:absolute; top:16px; right:18px; z-index:1; font-family:var(--font-heading); font-weight:800; font-size:13px; color:#fff; background:rgba(10,20,24,0.5); padding:2px 8px; font-feature-settings:'tnum' 1;">03</span>
         <div style="width:100%; aspect-ratio:4/3; overflow:hidden; transition:transform 0.4s ease;" style-hover="transform:scale(1.06);">
-          <image-slot id="servico-eventos-photo" shape="rect" src="uploads/servico-eventos.png" style="width:100%; height:100%;" placeholder="Foto de evento/torneio"></image-slot>
+          <image-slot id="servico-eventos-photo" shape="rect" style="width:100%; height:100%;" placeholder="Foto de evento/torneio"></image-slot>
         </div>
         <div style="padding:20px 24px 28px; flex:1; display:flex; flex-direction:column;">
           <h3 class="card-title">Eventos e torneios</h3>
@@ -208,7 +209,7 @@
       <div class="elev-sm" style="position:relative; background:var(--color-bg); border:1px solid var(--color-divider); padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%; transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;" style-hover="transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--color-accent-2);">
         <span style="position:absolute; top:16px; right:18px; z-index:1; font-family:var(--font-heading); font-weight:800; font-size:13px; color:#fff; background:rgba(10,20,24,0.5); padding:2px 8px; font-feature-settings:'tnum' 1;">04</span>
         <div style="width:100%; aspect-ratio:4/3; overflow:hidden; transition:transform 0.4s ease;" style-hover="transform:scale(1.06);">
-          <image-slot id="servico-festas-photo" shape="rect" src="uploads/servico-festas.jpg" style="width:100%; height:100%;" placeholder="Foto de festa de aniversário"></image-slot>
+          <image-slot id="servico-festas-photo" shape="rect" style="width:100%; height:100%;" placeholder="Foto de festa de aniversário"></image-slot>
         </div>
         <div style="padding:20px 24px 28px; flex:1; display:flex; flex-direction:column;">
           <h3 class="card-title">Festas de aniversário</h3>
@@ -220,7 +221,7 @@
 
   <section class="vbt-two-col vbt-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); max-width:1200px; margin:0 auto; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); gap:48px; align-items:center; border-top:2px solid var(--color-divider);">
     <figure class="vbt-team-photo" style="margin:0; order:2;">
-      <image-slot id="team-photo" shape="rect" src="uploads/team-instrutor.jpg" fit="cover" style="width:100%; aspect-ratio:4/3;" placeholder="Foto da equipe de instrutores"></image-slot>
+      <image-slot id="team-photo" shape="rect" fit="cover" style="width:100%; aspect-ratio:4/3;" placeholder="Foto da equipe de instrutores"></image-slot>
     </figure>
     <div class="vbt-team-copy" style="order:1;">
       <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">Nossa equipe</span>
@@ -269,17 +270,17 @@
 
   <section class="vbt-location-section" style="position:relative; height:clamp(420px,62vw,640px); width:100%; overflow:hidden; background:var(--color-surface);">
     <div class="vbt-location-map" style="position:absolute; inset:0; width:100%; height:100%;">
-      <iframe title="Mapa — Av. José Soares de Alcântara, 109, Vila Verde, Varginha - MG" src="https://www.google.com/maps?q=Av.+Jos%C3%A9+Soares+de+Alc%C3%A2ntara%2C+109+-+Vila+Verde%2C+Varginha+-+MG%2C+37072-015&output=embed" style="border:0; width:100%; height:100%; display:block;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen="{{ true }}"></iframe>
+      <iframe title="Mapa — [Endereço da quadra, número], [Bairro, Cidade - UF]" src="https://www.google.com/maps?q=SEU_ENDERECO_AQUI&output=embed" style="border:0; width:100%; height:100%; display:block;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen="{{ true }}"></iframe>
     </div>
     <div class="vbt-location-card" style="position:absolute; top:6%; left:50%; transform:translateX(-50%); width:min(680px,92%); display:grid; grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr); background:var(--color-text); box-shadow:var(--shadow-lg);">
-      <image-slot id="location-photo" shape="rect" src="uploads/location-facade.png" style="width:100%; height:100%; min-height:220px;" placeholder="Foto da fachada / quadras"></image-slot>
+      <image-slot id="location-photo" shape="rect" style="width:100%; height:100%; min-height:220px;" placeholder="Foto da fachada / quadras"></image-slot>
       <div style="padding:clamp(24px,3vw,36px); color:var(--color-bg); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:10px; height:100%;">
-        <img src="uploads/logo.png" alt="Villa Beach Tennis" style="width:44px; height:44px; margin-bottom:6px;">
+        <svg viewBox="0 0 64 64" width="44" height="44" style="flex-shrink:0; margin-bottom:6px;" aria-label="Logo do clube" role="img"><circle cx="32" cy="32" r="30" fill="var(--color-bg)" stroke="var(--color-accent)" stroke-width="4"/><path d="M20 34 L29 43 L45 23" fill="none" stroke="var(--color-accent-2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span style="display:block; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-300);">Endereço</span>
-        <p style="font-size:17px; line-height:1.5; margin:0; font-weight:600;">Av. José Soares de Alcântara, 109</p>
-        <p style="font-size:14px; line-height:1.5; margin:0; color:rgba(243,238,224,0.75);">Vila Verde, Varginha - MG</p>
-        <p style="font-size:13px; line-height:1.5; margin:0 0 10px; color:rgba(243,238,224,0.55);">CEP: 37072-015</p>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=Av.%20Jos%C3%A9%20Soares%20de%20Alc%C3%A2ntara%2C%20109%20-%20Vila%20Verde%2C%20Varginha%20-%20MG%2C%2037072-015" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center;">Pegue a localização →</a>
+        <p style="font-size:17px; line-height:1.5; margin:0; font-weight:600;">[Endereço da quadra, número]</p>
+        <p style="font-size:14px; line-height:1.5; margin:0; color:rgba(243,238,224,0.75);">[Bairro, Cidade - UF]</p>
+        <p style="font-size:13px; line-height:1.5; margin:0 0 10px; color:rgba(243,238,224,0.55);">CEP: [00000-000]</p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=SEU_ENDERECO_AQUI" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center;">Pegue a localização →</a>
       </div>
       <div class="vbt-location-pointer" style="position:absolute; left:50%; bottom:-16px; transform:translateX(-50%); width:0; height:0; border-left:16px solid transparent; border-right:16px solid transparent; border-top:16px solid var(--color-text);"></div>
     </div>
@@ -299,7 +300,7 @@
           </div>
           <div class="field">
             <label for="contact-telefone">Telefone</label>
-            <input id="contact-telefone" class="input" type="tel" inputMode="numeric" maxLength="15" placeholder="(35) 90000-0000" value="{{ contactForm.telefone }}" onChange="{{ onContactPhoneChange }}" required="{{ true }}">
+            <input id="contact-telefone" class="input" type="tel" inputMode="numeric" maxLength="15" placeholder="(00) 00000-0000" value="{{ contactForm.telefone }}" onChange="{{ onContactPhoneChange }}" required="{{ true }}">
           </div>
         </div>
         <div class="field">
@@ -321,21 +322,21 @@
           <svg width="40" height="40" viewBox="0 0 32 32" fill="#25D366" style="flex-shrink:0;"><path d="M16.001 3C9.099 3 3.5 8.6 3.5 15.5c0 2.55.75 4.92 2.03 6.9L3 29l6.77-2.48A12.4 12.4 0 0016 28c6.9 0 12.5-5.6 12.5-12.5S22.9 3 16 3zm0 22.7c-2.13 0-4.13-.58-5.86-1.6l-.42-.25-4.22 1.55 1.53-4.1-.27-.42a10.16 10.16 0 01-1.66-5.55C5.11 9.83 9.94 5 16 5s10.89 4.83 10.89 10.5S22.06 25.7 16 25.7z"></path><path d="M22.3 18.73c-.34-.17-2-.99-2.31-1.1-.31-.11-.53-.17-.76.17-.22.34-.86 1.1-1.05 1.32-.19.22-.39.25-.72.08-1.94-.97-3.21-1.73-4.49-3.92-.34-.58.34-.54.97-1.8.11-.22.06-.41-.03-.58-.09-.17-.66-1.6-.91-2.19-.24-.58-.49-.5-.68-.5-.17-.01-.38-.01-.58-.01-.2 0-.53.08-.81.39-.28.31-1.06 1.04-1.06 2.53s1.09 2.94 1.24 3.14c.15.2 2.06 3.15 5.06 4.29 2.51.95 3.02.76 3.57.71.55-.05 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.3-.2-.63-.34z"></path></svg>
           <div>
             <p style="font-family:var(--font-heading); font-weight:800; font-size:15px; margin:0 0 3px; color:var(--color-text);">WhatsApp</p>
-            <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent);">(35) 99866-8742</p>
+            <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent);">(00) 00000-0000</p>
           </div>
         </a>
         <a href="{{ instagramHref }}" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:16px; text-decoration:none; color:var(--color-text);" style-hover="opacity:0.7;">
           <svg width="38" height="38" viewBox="0 0 24 24" style="flex-shrink:0;"><defs><radialGradient id="igGrad" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"></stop><stop offset="5%" stop-color="#fdf497"></stop><stop offset="45%" stop-color="#fd5949"></stop><stop offset="60%" stop-color="#d6249f"></stop><stop offset="90%" stop-color="#285AEB"></stop></radialGradient></defs><rect x="2" y="2" width="20" height="20" rx="5.5" fill="url(#igGrad)"></rect><circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" stroke-width="1.8"></circle><circle cx="17.2" cy="6.8" r="0.9" fill="#fff"></circle></svg>
           <div>
             <p style="font-family:var(--font-heading); font-weight:800; font-size:15px; margin:0 0 3px; color:var(--color-text);">Instagram</p>
-            <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent);">@arena.villaverde</p>
+            <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent);">@seu_instagram</p>
           </div>
         </a>
         <a href="{{ facebookHref }}" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:16px; text-decoration:none; color:var(--color-text);" style-hover="opacity:0.7;">
           <svg width="38" height="38" viewBox="0 0 24 24" style="flex-shrink:0;"><rect x="2" y="2" width="20" height="20" rx="5.5" fill="#1877F2"></rect><path d="M15.5 8.5h-1.3c-.5 0-.7.25-.7.75V10.5h2l-.25 2h-1.75v6h-2.2v-6H9.5v-2h1.8V8.9c0-1.65.9-2.9 2.6-2.9h1.6v2.5z" fill="#fff"></path></svg>
           <div>
             <p style="font-family:var(--font-heading); font-weight:800; font-size:15px; margin:0 0 3px; color:var(--color-text);">Facebook</p>
-            <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent);">Arena Villa Verde</p>
+            <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent);">[Nome do Clube]</p>
           </div>
         </a>
       </div>
@@ -345,8 +346,8 @@
   
 
   <footer style="border-top:2px solid var(--color-divider); padding:32px clamp(20px,5vw,72px); max-width:1200px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center;">
-    <img src="uploads/logo.png" alt="Villa Beach Tennis" style="height:48px; width:48px;">
-    <p style="font-size:13px; color:color-mix(in srgb, var(--color-text) 70%, transparent); margin:0;">© 2026 Arena Villa Verde | Todos os direitos reservados.</p>
+    <svg viewBox="0 0 64 64" width="48" height="48" style="flex-shrink:0;" aria-label="Logo do clube" role="img"><circle cx="32" cy="32" r="30" fill="var(--color-bg)" stroke="var(--color-accent)" stroke-width="4"/><path d="M20 34 L29 43 L45 23" fill="none" stroke="var(--color-accent-2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <p style="font-size:13px; color:color-mix(in srgb, var(--color-text) 70%, transparent); margin:0;">© 2026 [Nome do Clube] | Todos os direitos reservados.</p>
   </footer>
 
   <a href="{{ whatsappHref }}" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" style="position:fixed; bottom:24px; right:24px; z-index:50; width:60px; height:60px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,0.3); transition:transform 0.15s ease, box-shadow 0.15s ease;" style-hover="transform:scale(1.08); box-shadow:0 10px 24px rgba(0,0,0,0.4);" style-active="transform:scale(0.94);">
@@ -379,13 +380,13 @@ class Component extends DCLogic {
     e.preventDefault();
     const f = this.state.contactForm;
     const lines = [
-      'Olá! Vim pelo site da Villa Beach Tennis.',
+      'Olá! Vim pelo site do [Nome do Clube].',
       'Nome: ' + f.nome,
       'Telefone: ' + f.telefone,
       f.email ? ('E-mail: ' + f.email) : null,
       'Mensagem: ' + f.mensagem
     ].filter(Boolean).join('\n');
-    window.open('https://wa.me/5535998668742?text=' + encodeURIComponent(lines), '_blank');
+    window.open('https://wa.me/SEUNUMERODEWHATSAPP?text=' + encodeURIComponent(lines), '_blank');
   }
   animateStats() {
     if (this.state.statsPlayed) return;
@@ -463,10 +464,10 @@ class Component extends DCLogic {
   renderVals() {
     const showTestimonials = this.props.showTestimonials ?? true;
     const ctaChannel = this.props.ctaChannel ?? 'whatsapp';
-    const whatsappHref = 'https://wa.me/5535998668742?text=' + encodeURIComponent('Oi! Quero saber mais sobre a Villa Beach Tennis.');
-    const instagramHref = 'https://www.instagram.com/arena.villaverde/';
-    const facebookHref = 'https://www.facebook.com/p/Arena-Villa-Verde-61569492670767/';
-    const telHref = 'tel:+5535998668742';
+    const whatsappHref = 'https://wa.me/SEUNUMERODEWHATSAPP?text=' + encodeURIComponent('Oi! Quero saber mais sobre o [Nome do Clube].');
+    const instagramHref = 'https://www.instagram.com/SEU_INSTAGRAM/';
+    const facebookHref = 'https://www.facebook.com/SEU_FACEBOOK/';
+    const telHref = 'tel:+SEUNUMERODEWHATSAPP';
     const ctaLabel = ctaChannel === 'telefone' ? 'Ligar agora' : 'Reserve agora';
     const ctaHref = ctaChannel === 'telefone' ? telHref : whatsappHref;
     const played = this.state.statsPlayed;
