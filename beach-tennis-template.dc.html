@@ -22,21 +22,21 @@
     body { margin: 0; text-wrap: pretty; }
     a { color: var(--color-accent); }
     a:hover { color: var(--color-accent-700); }
-    @keyframes vbt-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes btc-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
     /* Template Beach Tennis — responsivo. Seções de 2 colunas viram 1 coluna
        e o cartão de localização passa de overlay flutuante para bloco
        empilhado abaixo do mapa, evitando corte de conteúdo em telas estreitas. */
     @media (max-width: 860px) {
-      .vbt-two-col { grid-template-columns: minmax(0,1fr) !important; }
-      .vbt-team-photo { order: 1 !important; }
-      .vbt-team-copy { order: 2 !important; }
+      .btc-two-col { grid-template-columns: minmax(0,1fr) !important; }
+      .btc-team-photo { order: 1 !important; }
+      .btc-team-copy { order: 2 !important; }
     }
     @media (max-width: 640px) {
-      .vbt-services-grid { grid-template-columns: minmax(0,1fr) !important; }
-      .vbt-form-row { grid-template-columns: minmax(0,1fr) !important; }
-      .vbt-location-section { height: 760px !important; }
-      .vbt-location-card {
+      .btc-services-grid { grid-template-columns: minmax(0,1fr) !important; }
+      .btc-form-row { grid-template-columns: minmax(0,1fr) !important; }
+      .btc-location-section { height: 760px !important; }
+      .btc-location-card {
         width: 92% !important;
         grid-template-columns: minmax(0,1fr) !important;
       }
@@ -45,70 +45,70 @@
     /* Header — menu hambúrguer no mobile via checkbox (sem JS): logo + marca
        ficam sozinhos à esquerda, links viram um dropdown, e o CTA do header
        some (mantém só o CTA do hero). */
-    .vbt-nav-checkbox { display: none; }
-    .vbt-nav-burger { display: none; }
+    .btc-nav-checkbox { display: none; }
+    .btc-nav-burger { display: none; }
     @media (max-width: 860px) {
-      .vbt-nav-cta { display: none !important; }
-      .vbt-nav-burger {
+      .btc-nav-cta { display: none !important; }
+      .btc-nav-burger {
         display: flex !important; flex-direction: column; justify-content: center; gap: 5px;
         width: 32px; height: 32px; margin-left: auto; cursor: pointer; flex-shrink: 0;
       }
-      .vbt-nav-burger span {
+      .btc-nav-burger span {
         display: block; width: 100%; height: 2px; background: #f3eee0; border-radius: 2px;
         transition: transform 0.2s ease, opacity 0.2s ease;
       }
-      .vbt-nav-checkbox:checked ~ .vbt-nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-      .vbt-nav-checkbox:checked ~ .vbt-nav-burger span:nth-child(2) { opacity: 0; }
-      .vbt-nav-checkbox:checked ~ .vbt-nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-      .vbt-nav-links {
+      .btc-nav-checkbox:checked ~ .btc-nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .btc-nav-checkbox:checked ~ .btc-nav-burger span:nth-child(2) { opacity: 0; }
+      .btc-nav-checkbox:checked ~ .btc-nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+      .btc-nav-links {
         display: none !important; flex-direction: column; gap: 2px;
         position: absolute !important; top: 100% !important; left: 0 !important; right: 0 !important;
         width: 100% !important; margin: 0 !important;
         background: rgba(10,20,24,0.92); padding: 4px clamp(20px,5vw,72px) 16px;
         box-sizing: border-box;
       }
-      .vbt-nav-checkbox:checked ~ .vbt-nav-links { display: flex !important; }
-      .vbt-nav-links a { padding: 12px 0; border-bottom: 1px solid rgba(243,238,224,0.15); }
-      .vbt-nav:has(.vbt-nav-checkbox:checked) { background: rgba(10,20,24,0.92) !important; }
+      .btc-nav-checkbox:checked ~ .btc-nav-links { display: flex !important; }
+      .btc-nav-links a { padding: 12px 0; border-bottom: 1px solid rgba(243,238,224,0.15); }
+      .btc-nav:has(.btc-nav-checkbox:checked) { background: rgba(10,20,24,0.92) !important; }
     }
 
     /* Reveal suave ao rolar — cada seção entra com fade + leve subida.
        Respeita prefers-reduced-motion para quem desativa animações. */
-    .vbt-reveal {
+    .btc-reveal {
       opacity: 0; transform: translateY(28px);
       transition: opacity 0.7s cubic-bezier(.16,.8,.24,1), transform 0.7s cubic-bezier(.16,.8,.24,1);
     }
-    .vbt-reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .btc-reveal.is-visible { opacity: 1; transform: translateY(0); }
     @media (prefers-reduced-motion: reduce) {
-      .vbt-reveal { transition: none !important; opacity: 1 !important; transform: none !important; }
+      .btc-reveal { transition: none !important; opacity: 1 !important; transform: none !important; }
     }
 
     /* Textura leve de areia — grão sutil no lugar de um bege liso. */
-    .vbt-sand-texture {
+    .btc-sand-texture {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
       background-repeat: repeat;
     }
 
-    .vbt-wave { display: block; width: 100%; height: 48px; }
-    @media (max-width: 640px) { .vbt-wave { height: 28px; } }
+    .btc-wave { display: block; width: 100%; height: 48px; }
+    @media (max-width: 640px) { .btc-wave { height: 28px; } }
   </style>
 </helmet>
-<div class="vbt-sand-texture" style="--color-bg:#f3eee0; --color-surface:#eae2cd; --color-text:#211c17; --color-accent:#e2572a; --color-accent-100:#fcece1; --color-accent-200:#f7cdb0; --color-accent-300:#efab7c; --color-accent-600:#b93f18; --color-accent-700:#8a2e10; --color-accent-800:#5f1f0b; --color-accent-2:#1c6e8c; --color-accent-2-100:#e7f0f3; --color-accent-2-200:#cde3ea; --color-accent-2-300:#a4cbd8; --color-accent-2-600:#155a72; --color-accent-2-700:#0f4557; --color-accent-2-800:#0a3341; --color-divider:rgba(33,28,23,0.35); background:var(--color-bg); color:var(--color-text); font-family:var(--font-body); min-height:100vh;">
+<div class="btc-sand-texture" style="--color-bg:#f3eee0; --color-surface:#eae2cd; --color-text:#211c17; --color-accent:#e2572a; --color-accent-100:#fcece1; --color-accent-200:#f7cdb0; --color-accent-300:#efab7c; --color-accent-600:#b93f18; --color-accent-700:#8a2e10; --color-accent-800:#5f1f0b; --color-accent-2:#1c6e8c; --color-accent-2-100:#e7f0f3; --color-accent-2-200:#cde3ea; --color-accent-2-300:#a4cbd8; --color-accent-2-600:#155a72; --color-accent-2-700:#0f4557; --color-accent-2-800:#0a3341; --color-divider:rgba(33,28,23,0.35); background:var(--color-bg); color:var(--color-text); font-family:var(--font-body); min-height:100vh;">
 
   <section style="position:relative; min-height:clamp(560px,68vh,700px); display:flex; align-items:flex-end;">
-    <nav class="nav vbt-nav" style="position:absolute; top:0; left:0; right:0; z-index:2; display:flex; align-items:center; flex-wrap:wrap; row-gap:12px; column-gap:24px; padding:20px clamp(20px,5vw,72px); background:transparent; border-bottom:none; transition:background 0.2s ease;">
+    <nav class="nav btc-nav" style="position:absolute; top:0; left:0; right:0; z-index:2; display:flex; align-items:center; flex-wrap:wrap; row-gap:12px; column-gap:24px; padding:20px clamp(20px,5vw,72px); background:transparent; border-bottom:none; transition:background 0.2s ease;">
       <svg viewBox="0 0 64 64" width="44" height="44" style="flex-shrink:0;" aria-label="Logo do clube" role="img"><circle cx="32" cy="32" r="30" fill="var(--color-bg)" stroke="var(--color-accent)" stroke-width="4"/><path d="M20 34 L29 43 L45 23" fill="none" stroke="var(--color-accent-2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <span class="nav-brand" style="font-family:var(--font-heading); font-weight:800; font-size:19px; letter-spacing:-0.01em; color:#f3eee0; white-space:nowrap;">[Nome do Clube]</span>
-      <input type="checkbox" id="vbt-nav-toggle" class="vbt-nav-checkbox">
-      <label for="vbt-nav-toggle" class="vbt-nav-burger" aria-label="Abrir menu">
+      <input type="checkbox" id="btc-nav-toggle" class="btc-nav-checkbox">
+      <label for="btc-nav-toggle" class="btc-nav-burger" aria-label="Abrir menu">
         <span></span><span></span><span></span>
       </label>
-      <div class="vbt-nav-links" style="display:flex; align-items:center; gap:24px;">
+      <div class="btc-nav-links" style="display:flex; align-items:center; gap:24px;">
         <a href="#sobre" style="font-size:14px; text-decoration:none; color:#f3eee0;">Sobre</a>
         <a href="#servicos" style="font-size:14px; text-decoration:none; color:#f3eee0;">Serviços</a>
         <a href="#contato" style="font-size:14px; text-decoration:none; color:#f3eee0;">Contato</a>
       </div>
-      <a href="{{ ctaHref }}" target="_blank" rel="noopener" class="btn btn-primary vbt-nav-cta" style="white-space:nowrap; color:var(--color-bg); background:linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-600) 100%); border-radius:999px; box-shadow:0 4px 14px rgba(226,87,42,0.4); transition:transform 0.15s ease, box-shadow 0.15s ease;" style-hover="transform:translateY(-2px); box-shadow:0 8px 20px rgba(226,87,42,0.5);" style-active="transform:translateY(0) scale(0.96); box-shadow:0 2px 8px rgba(226,87,42,0.3);">{{ ctaLabel }}</a>
+      <a href="{{ ctaHref }}" target="_blank" rel="noopener" class="btn btn-primary btc-nav-cta" style="white-space:nowrap; color:var(--color-bg); background:linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-600) 100%); border-radius:999px; box-shadow:0 4px 14px rgba(226,87,42,0.4); transition:transform 0.15s ease, box-shadow 0.15s ease;" style-hover="transform:translateY(-2px); box-shadow:0 8px 20px rgba(226,87,42,0.5);" style-active="transform:translateY(0) scale(0.96); box-shadow:0 2px 8px rgba(226,87,42,0.3);">{{ ctaLabel }}</a>
     </nav>
     <!-- Troque por um <video> ou <image-slot> com foto/vídeo real da quadra. -->
     <div style="position:absolute; inset:0; width:100%; height:100%; background:linear-gradient(135deg, var(--color-accent-800) 0%, var(--color-accent-2-800) 100%);"></div>
@@ -122,10 +122,10 @@
         <a href="{{ ctaHref }}" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:16px; padding:14px 32px; color:var(--color-bg); white-space:nowrap; background:linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-600) 100%); border-radius:999px; box-shadow:0 6px 18px rgba(226,87,42,0.45); transition:transform 0.15s ease, box-shadow 0.15s ease;" style-hover="transform:translateY(-2px); box-shadow:0 10px 24px rgba(226,87,42,0.55);" style-active="transform:translateY(0) scale(0.96); box-shadow:0 3px 10px rgba(226,87,42,0.3);">{{ ctaLabel }}</a>
       </div>
     </div>
-    <svg class="vbt-wave" style="position:absolute; left:0; right:0; bottom:-1px; z-index:1; pointer-events:none;" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0,32 C240,58 480,4 720,20 C960,36 1200,56 1440,26 L1440,60 L0,60 Z" fill="var(--color-bg)"></path></svg>
+    <svg class="btc-wave" style="position:absolute; left:0; right:0; bottom:-1px; z-index:1; pointer-events:none;" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0,32 C240,58 480,4 720,20 C960,36 1200,56 1440,26 L1440,60 L0,60 Z" fill="var(--color-bg)"></path></svg>
   </section>
 
-  <section id="sobre" class="vbt-two-col vbt-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); max-width:1200px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr); gap:48px; align-items:center;">
+  <section id="sobre" class="btc-two-col btc-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); max-width:1200px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr); gap:48px; align-items:center;">
     <div>
       <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">Sobre nós</span>
       <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(28px,3.4vw,40px); letter-spacing:-0.015em; margin:0 0 16px; max-width:26ch;">Onde a areia encontra o esporte</h2>
@@ -147,7 +147,7 @@
     </figure>
   </section>
 
-  <section ref="{{ statsSectionRef }}" aria-label="Villa em números" style="position:relative; overflow:hidden; min-height:320px; padding:clamp(64px,8vw,104px) clamp(20px,5vw,72px); border-top:2px solid var(--color-divider); border-bottom:2px solid var(--color-divider); display:flex; align-items:center;">
+  <section ref="{{ statsSectionRef }}" aria-label="Clube em números" style="position:relative; overflow:hidden; min-height:320px; padding:clamp(64px,8vw,104px) clamp(20px,5vw,72px); border-top:2px solid var(--color-divider); border-bottom:2px solid var(--color-divider); display:flex; align-items:center;">
     <div style="position:absolute; inset:0; overflow:hidden;">
       <image-slot id="stats-bg" shape="rect" fit="cover" style="width:100%; height:100%; transform:scale(1.06); filter:saturate(1.15);" placeholder="Foto de beach tennis (fundo)"></image-slot>
     </div>
@@ -172,10 +172,10 @@
     </div>
   </section>
 
-  <section id="servicos" class="vbt-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); max-width:1200px; margin:0 auto;">
+  <section id="servicos" class="btc-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); max-width:1200px; margin:0 auto;">
     <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">O que oferecemos</span>
     <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(28px,3.4vw,40px); letter-spacing:-0.015em; margin:0 0 40px; max-width:32ch;">Serviços feitos para você jogar mais</h2>
-    <div class="vbt-services-grid" style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; align-items:stretch;">
+    <div class="btc-services-grid" style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; align-items:stretch;">
       <div class="elev-sm" style="position:relative; background:var(--color-bg); border:1px solid var(--color-divider); padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%; transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;" style-hover="transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--color-accent);">
         <span style="position:absolute; top:16px; right:18px; z-index:1; font-family:var(--font-heading); font-weight:800; font-size:13px; color:#fff; background:rgba(10,20,24,0.5); padding:2px 8px; font-feature-settings:'tnum' 1;">01</span>
         <div style="width:100%; aspect-ratio:4/3; overflow:hidden; transition:transform 0.4s ease;" style-hover="transform:scale(1.06);">
@@ -219,11 +219,11 @@
     </div>
   </section>
 
-  <section class="vbt-two-col vbt-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); max-width:1200px; margin:0 auto; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); gap:48px; align-items:center; border-top:2px solid var(--color-divider);">
-    <figure class="vbt-team-photo" style="margin:0; order:2;">
+  <section class="btc-two-col btc-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); max-width:1200px; margin:0 auto; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); gap:48px; align-items:center; border-top:2px solid var(--color-divider);">
+    <figure class="btc-team-photo" style="margin:0; order:2;">
       <image-slot id="team-photo" shape="rect" fit="cover" style="width:100%; aspect-ratio:4/3;" placeholder="Foto da equipe de instrutores"></image-slot>
     </figure>
-    <div class="vbt-team-copy" style="order:1;">
+    <div class="btc-team-copy" style="order:1;">
       <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">Nossa equipe</span>
       <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(26px,3vw,36px); letter-spacing:-0.015em; margin:0 0 16px; max-width:26ch;">Instrutores prontos para te ensinar</h2>
       <p style="font-size:16px; line-height:1.65; max-width:50ch; color:color-mix(in srgb, var(--color-text) 80%, transparent); margin:0;">Nossas aulas de beach tennis, vôlei e futevôlei combinam diversão ao sol com treino técnico de verdade. Professores certificados acompanham cada turma, do primeiro saque à competição.</p>
@@ -231,7 +231,7 @@
   </section>
 
   <sc-if value="{{ showTestimonials }}" hint-placeholder-val="{{ true }}">
-    <section id="depoimentos" class="vbt-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); background:var(--color-surface); border-top:2px solid var(--color-divider); border-bottom:2px solid var(--color-divider);">
+    <section id="depoimentos" class="btc-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); background:var(--color-surface); border-top:2px solid var(--color-divider); border-bottom:2px solid var(--color-divider);">
       <div style="max-width:1200px; margin:0 auto;">
         <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">Quem já jogou com a gente</span>
         <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(28px,3.4vw,40px); letter-spacing:-0.015em; margin:0 0 40px; max-width:32ch;">Depoimentos de exemplo — troque pelos reais quando tiver</h2>
@@ -251,7 +251,7 @@
             </figcaption>
           </figure>
           <figure style="margin:0;">
-            <blockquote style="font-family:var(--font-heading); font-weight:800; font-size:19px; line-height:1.5; letter-spacing:-0.01em; margin:0 0 16px;">"Fizemos nosso torneio de confraternização na Villa e foi impecável, do som à arbitragem. Já reservamos o próximo."</blockquote>
+            <blockquote style="font-family:var(--font-heading); font-weight:800; font-size:19px; line-height:1.5; letter-spacing:-0.01em; margin:0 0 16px;">"Fizemos nosso torneio de confraternização no clube e foi impecável, do som à arbitragem. Já reservamos o próximo."</blockquote>
             <figcaption style="display:flex; align-items:center; gap:12px; font-size:14px; color:color-mix(in srgb, var(--color-text) 70%, transparent);">
               <image-slot id="quote-3" shape="circle" style="width:40px; height:40px; flex-shrink:0;" placeholder="Foto"></image-slot>
               Fernanda A., organizadora de evento
@@ -262,17 +262,17 @@
     </section>
   </sc-if>
 
-  <section id="localizacao" class="vbt-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px) 0; max-width:1200px; margin:0 auto; text-align:left;">
+  <section id="localizacao" class="btc-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px) 0; max-width:1200px; margin:0 auto; text-align:left;">
     <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">Localização</span>
     <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(28px,3.4vw,40px); letter-spacing:-0.015em; margin:0 0 8px;">Como chegar</h2>
     <p style="font-size:16px; line-height:1.6; margin:0 0 32px; color:color-mix(in srgb, var(--color-text) 78%, transparent);">Confira as informações do local.</p>
   </section>
 
-  <section class="vbt-location-section" style="position:relative; height:clamp(420px,62vw,640px); width:100%; overflow:hidden; background:var(--color-surface);">
-    <div class="vbt-location-map" style="position:absolute; inset:0; width:100%; height:100%;">
+  <section class="btc-location-section" style="position:relative; height:clamp(420px,62vw,640px); width:100%; overflow:hidden; background:var(--color-surface);">
+    <div class="btc-location-map" style="position:absolute; inset:0; width:100%; height:100%;">
       <iframe title="Mapa — [Endereço da quadra, número], [Bairro, Cidade - UF]" src="https://www.google.com/maps?q=SEU_ENDERECO_AQUI&output=embed" style="border:0; width:100%; height:100%; display:block;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen="{{ true }}"></iframe>
     </div>
-    <div class="vbt-location-card" style="position:absolute; top:6%; left:50%; transform:translateX(-50%); width:min(680px,92%); display:grid; grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr); background:var(--color-text); box-shadow:var(--shadow-lg);">
+    <div class="btc-location-card" style="position:absolute; top:6%; left:50%; transform:translateX(-50%); width:min(680px,92%); display:grid; grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr); background:var(--color-text); box-shadow:var(--shadow-lg);">
       <image-slot id="location-photo" shape="rect" style="width:100%; height:100%; min-height:220px;" placeholder="Foto da fachada / quadras"></image-slot>
       <div style="padding:clamp(24px,3vw,36px); color:var(--color-bg); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:10px; height:100%;">
         <svg viewBox="0 0 64 64" width="44" height="44" style="flex-shrink:0; margin-bottom:6px;" aria-label="Logo do clube" role="img"><circle cx="32" cy="32" r="30" fill="var(--color-bg)" stroke="var(--color-accent)" stroke-width="4"/><path d="M20 34 L29 43 L45 23" fill="none" stroke="var(--color-accent-2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -282,18 +282,18 @@
         <p style="font-size:13px; line-height:1.5; margin:0 0 10px; color:rgba(243,238,224,0.55);">CEP: [00000-000]</p>
         <a href="https://www.google.com/maps/dir/?api=1&destination=SEU_ENDERECO_AQUI" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center;">Pegue a localização →</a>
       </div>
-      <div class="vbt-location-pointer" style="position:absolute; left:50%; bottom:-16px; transform:translateX(-50%); width:0; height:0; border-left:16px solid transparent; border-right:16px solid transparent; border-top:16px solid var(--color-text);"></div>
+      <div class="btc-location-pointer" style="position:absolute; left:50%; bottom:-16px; transform:translateX(-50%); width:0; height:0; border-left:16px solid transparent; border-right:16px solid transparent; border-top:16px solid var(--color-text);"></div>
     </div>
   </section>
 
-  <section id="contato" class="vbt-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); max-width:1200px; margin:0 auto;">
+  <section id="contato" class="btc-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); max-width:1200px; margin:0 auto;">
     <div style="text-align:left; margin-bottom:40px;">
       <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">Fale com a gente</span>
       <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(26px,3vw,34px); letter-spacing:-0.015em; margin:0; max-width:24ch;">Alguma dúvida? Entre em contato</h2>
     </div>
-    <div class="vbt-two-col" style="display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,0.8fr); gap:48px; align-items:start;">
+    <div class="btc-two-col" style="display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,0.8fr); gap:48px; align-items:start;">
       <form onSubmit="{{ onContactSubmit }}" style="display:grid; gap:16px;">
-        <div class="vbt-form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div class="btc-form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
           <div class="field">
             <label for="contact-nome">Nome</label>
             <input id="contact-nome" class="input" type="text" value="{{ contactForm.nome }}" onChange="{{ onContactField('nome') }}" required="{{ true }}">
@@ -429,7 +429,7 @@ class Component extends DCLogic {
     this.scheduleTyping();
     this.cursorTimer = setInterval(() => this.setState(s => ({ cursorOn: !s.cursorOn })), 500);
 
-    const revealTargets = document.querySelectorAll('.vbt-reveal');
+    const revealTargets = document.querySelectorAll('.btc-reveal');
     if (revealTargets.length) {
       this.revealObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {

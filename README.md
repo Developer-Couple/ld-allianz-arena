@@ -47,6 +47,9 @@ contexto:
 10. **Textos dos serviços/depoimentos** — genéricos o bastante pra maioria
     dos clubes; ajuste o que não fizer sentido.
 
+Prefixo das classes CSS próprias do layout: `btc-` (Beach Tennis Club) —
+genérico de propósito, não é o nome de nenhum cliente.
+
 ## Fluxo com `git worktree` pra cada novo prospect
 
 Este repo fica só com o template genérico na branch `main`. Pra cada lead
