@@ -2,6 +2,7 @@
   "name": "beach-tennis-landing-page-template",
   "private": true,
   "version": "1.0.0",
+  "packageManager": "pnpm@11.22.0",
   "scripts": {
     "responsive-check": "node scripts/responsive-check.mjs"
   },

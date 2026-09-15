@@ -13,7 +13,7 @@ Já vem pronto:
 - Embed real do Google Maps (só trocar a query do endereço).
 - Transições suaves ao rolar (`prefers-reduced-motion` respeitado).
 - Par tipográfico Archivo (títulos) + Plus Jakarta Sans (corpo).
-- `npm run responsive-check` — script Playwright que sobe um server local e
+- `pnpm run responsive-check` — script Playwright que sobe um server local e
   tira screenshots em vários breakpoints (`.screenshots/`), pra validar
   qualquer ajuste antes de mandar pro cliente.
 
@@ -62,17 +62,17 @@ pros outros (`git cherry-pick`).
 cd ~/Dev/leads/_templates/beach-tennis-landing-page
 
 # cria a pasta do novo cliente a partir do template, numa branch nova
-git worktree add ../../semana-X/<data>/previews/<Cliente>/project \
+git worktree add ../../semana-X/<data>/previews/<slug-do-cliente>/project \
   -b client/<slug-do-cliente> main
 
-cd ../../semana-X/<data>/previews/<Cliente>/project
-npm install
-npm run responsive-check   # confere que nada quebrou antes de mexer
+cd ../../semana-X/<data>/previews/<slug-do-cliente>/project
+pnpm install
+pnpm run responsive-check   # confere que nada quebrou antes de mexer
 ```
 
 Pra listar/remover worktrees depois:
 
 ```bash
 git worktree list
-git worktree remove ../../semana-X/<data>/previews/<Cliente>/project
+git worktree remove ../../semana-X/<data>/previews/<slug-do-cliente>/project
 ```
