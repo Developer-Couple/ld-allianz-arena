@@ -9,10 +9,10 @@
 <x-dc>
 <helmet>
   <template id="__bundler_thumbnail">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" data-bg-color="#f3eee0">
-      <rect width="200" height="200" fill="#f3eee0"/>
-      <circle cx="100" cy="90" r="45" fill="none" stroke="#e2572a" stroke-width="10"/>
-      <path d="M75 95 L95 115 L130 75" fill="none" stroke="#1c6e8c" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" data-bg-color="#f7f8fa">
+      <rect width="200" height="200" fill="#f7f8fa"/>
+      <circle cx="100" cy="90" r="45" fill="none" stroke="#e90100" stroke-width="10"/>
+      <path d="M75 95 L95 115 L130 75" fill="none" stroke="#146edd" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </template>
   <link rel="stylesheet" href="_ds/modernist-1b33bd65-cf6d-429a-8a2b-7ec2de46b696/styles.css">
@@ -23,6 +23,19 @@
     a { color: var(--color-accent); }
     a:hover { color: var(--color-accent-700); }
     @keyframes btc-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .btc-marquee-track { animation: btc-marquee 38s linear infinite; }
+    .btc-marquee-track:hover { animation-play-state: paused; }
+    @media (prefers-reduced-motion: reduce) { .btc-marquee-track { animation: none; } }
+
+    /* Faixa "Sobre nós": carrossel controlado pelo scroll só no mobile;
+       desktop usa a foto estática (.btc-sobre-photo-desktop). */
+    .btc-scroll-marquee-track { display: flex; will-change: transform; }
+    .btc-sobre-carousel-mobile { display: block; }
+    .btc-sobre-photo-desktop { display: none; }
+    @media (min-width: 861px) {
+      .btc-sobre-carousel-mobile { display: none; }
+      .btc-sobre-photo-desktop { display: block; }
+    }
 
     /* Template Beach Tennis — responsivo. Seções de 2 colunas viram 1 coluna
        e o cartão de localização passa de overlay flutuante para bloco
@@ -31,6 +44,14 @@
       .btc-two-col { grid-template-columns: minmax(0,1fr) !important; }
       .btc-team-photo { order: 1 !important; }
       .btc-team-copy { order: 2 !important; }
+    }
+
+    /* Hero: vídeo só no mobile (arquivo é vertical, pensado pra tela de
+       celular); desktop usa a foto estática (.btc-hero-photo-desktop). */
+    .btc-hero-photo-desktop { display: none; }
+    @media (min-width: 861px) {
+      .btc-hero-video { display: none; }
+      .btc-hero-photo-desktop { display: block; }
     }
     @media (max-width: 640px) {
       .btc-services-grid { grid-template-columns: minmax(0,1fr) !important; }
@@ -54,7 +75,7 @@
         width: 32px; height: 32px; margin-left: auto; cursor: pointer; flex-shrink: 0;
       }
       .btc-nav-burger span {
-        display: block; width: 100%; height: 2px; background: #f3eee0; border-radius: 2px;
+        display: block; width: 100%; height: 2px; background: #f7f8fa; border-radius: 2px;
         transition: transform 0.2s ease, opacity 0.2s ease;
       }
       .btc-nav-checkbox:checked ~ .btc-nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -68,7 +89,7 @@
         box-sizing: border-box;
       }
       .btc-nav-checkbox:checked ~ .btc-nav-links { display: flex !important; }
-      .btc-nav-links a { padding: 12px 0; border-bottom: 1px solid rgba(243,238,224,0.15); }
+      .btc-nav-links a { padding: 12px 0; border-bottom: 1px solid rgba(247,248,250,0.15); }
       .btc-nav:has(.btc-nav-checkbox:checked) { background: rgba(10,20,24,0.92) !important; }
     }
 
@@ -93,33 +114,36 @@
     @media (max-width: 640px) { .btc-wave { height: 28px; } }
   </style>
 </helmet>
-<div class="btc-sand-texture" style="--color-bg:#f3eee0; --color-surface:#eae2cd; --color-text:#211c17; --color-accent:#e2572a; --color-accent-100:#fcece1; --color-accent-200:#f7cdb0; --color-accent-300:#efab7c; --color-accent-600:#b93f18; --color-accent-700:#8a2e10; --color-accent-800:#5f1f0b; --color-accent-2:#1c6e8c; --color-accent-2-100:#e7f0f3; --color-accent-2-200:#cde3ea; --color-accent-2-300:#a4cbd8; --color-accent-2-600:#155a72; --color-accent-2-700:#0f4557; --color-accent-2-800:#0a3341; --color-divider:rgba(33,28,23,0.35); background:var(--color-bg); color:var(--color-text); font-family:var(--font-body); min-height:100vh;">
+<div class="btc-sand-texture" style="--color-bg:#f7f8fa; --color-surface:#edf0f5; --color-text:#14181f; --color-accent:#146edd; --color-accent-100:#e3eefb; --color-accent-200:#b4d1f4; --color-accent-300:#7baeec; --color-accent-600:#0e4d9b; --color-accent-700:#0a3871; --color-accent-800:#07274d; --color-accent-2:#e90100; --color-accent-2-100:#fce1e0; --color-accent-2-200:#f8aead; --color-accent-2-300:#f37170; --color-accent-2-600:#a30100; --color-accent-2-700:#770100; --color-accent-2-800:#520000; --color-divider:rgba(20,24,31,0.35); background:var(--color-bg); color:var(--color-text); font-family:var(--font-body); min-height:100vh;">
 
   <section style="position:relative; min-height:clamp(560px,68vh,700px); display:flex; align-items:flex-end;">
     <nav class="nav btc-nav" style="position:absolute; top:0; left:0; right:0; z-index:2; display:flex; align-items:center; flex-wrap:wrap; row-gap:12px; column-gap:24px; padding:20px clamp(20px,5vw,72px); background:transparent; border-bottom:none; transition:background 0.2s ease;">
-      <svg viewBox="0 0 64 64" width="44" height="44" style="flex-shrink:0;" aria-label="Logo do clube" role="img"><circle cx="32" cy="32" r="30" fill="var(--color-bg)" stroke="var(--color-accent)" stroke-width="4"/><path d="M20 34 L29 43 L45 23" fill="none" stroke="var(--color-accent-2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span class="nav-brand" style="font-family:var(--font-heading); font-weight:800; font-size:19px; letter-spacing:-0.01em; color:#f3eee0; white-space:nowrap;">[Nome do Clube]</span>
+      <img src="uploads/img/logo.webp" width="44" height="44" alt="Logo Allianz Arena" decoding="async" style="flex-shrink:0; border-radius:50%; object-fit:cover;">
+      <span class="nav-brand" style="font-family:var(--font-heading); font-weight:800; font-size:19px; letter-spacing:-0.01em; color:#f7f8fa; white-space:nowrap;">Allianz Arena</span>
       <input type="checkbox" id="btc-nav-toggle" class="btc-nav-checkbox">
       <label for="btc-nav-toggle" class="btc-nav-burger" aria-label="Abrir menu">
         <span></span><span></span><span></span>
       </label>
       <div class="btc-nav-links" style="display:flex; align-items:center; gap:24px;">
-        <a href="#sobre" style="font-size:14px; text-decoration:none; color:#f3eee0;">Sobre</a>
-        <a href="#servicos" style="font-size:14px; text-decoration:none; color:#f3eee0;">Serviços</a>
-        <a href="#contato" style="font-size:14px; text-decoration:none; color:#f3eee0;">Contato</a>
+        <a href="#sobre" style="font-size:14px; text-decoration:none; color:#f7f8fa;">Sobre</a>
+        <a href="#servicos" style="font-size:14px; text-decoration:none; color:#f7f8fa;">Serviços</a>
+        <a href="#contato" style="font-size:14px; text-decoration:none; color:#f7f8fa;">Contato</a>
       </div>
-      <a href="{{ ctaHref }}" target="_blank" rel="noopener" class="btn btn-primary btc-nav-cta" style="white-space:nowrap; color:var(--color-bg); background:linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-600) 100%); border-radius:999px; box-shadow:0 4px 14px rgba(226,87,42,0.4); transition:transform 0.15s ease, box-shadow 0.15s ease;" style-hover="transform:translateY(-2px); box-shadow:0 8px 20px rgba(226,87,42,0.5);" style-active="transform:translateY(0) scale(0.96); box-shadow:0 2px 8px rgba(226,87,42,0.3);">{{ ctaLabel }}</a>
+      <a href="{{ ctaHref }}" target="_blank" rel="noopener" class="btn btn-primary btc-nav-cta" style="white-space:nowrap; color:var(--color-bg); background:linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-600) 100%); border-radius:999px; box-shadow:0 4px 14px rgba(20,110,221,0.4); transition:transform 0.15s ease, box-shadow 0.15s ease;" style-hover="transform:translateY(-2px); box-shadow:0 8px 20px rgba(20,110,221,0.5);" style-active="transform:translateY(0) scale(0.96); box-shadow:0 2px 8px rgba(20,110,221,0.3);">{{ ctaLabel }}</a>
     </nav>
-    <!-- Troque por um <video> ou <image-slot> com foto/vídeo real da quadra. -->
     <div style="position:absolute; inset:0; width:100%; height:100%; background:linear-gradient(135deg, var(--color-accent-800) 0%, var(--color-accent-2-800) 100%);"></div>
+    <img class="btc-hero-photo-desktop" src="uploads/img/hero-desktop.webp" alt="Partida de vôlei de praia na Allianz Arena" decoding="async" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+    <video ref="{{ heroVideoRef }}" class="btc-hero-video" preload="none" poster="uploads/img/hero-poster.webp" playsinline aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+      <source src="uploads/video/hero-mobile.mp4" type="video/mp4">
+    </video>
     <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(10,20,24,0.8) 0%, rgba(10,20,24,0.62) 45%, rgba(10,20,24,0.4) 100%);"></div>
-    <div style="position: relative; z-index: 1; padding: clamp(96px,12vw,128px) clamp(20px,5vw,72px) clamp(40px,6vw,64px); color: #f3eee0; max-width: 720px; background-color: #0A141800;">
-      <svg viewBox="0 0 64 64" width="72" height="72" style="flex-shrink:0; margin-bottom:20px;" aria-label="Logo do clube" role="img"><circle cx="32" cy="32" r="30" fill="var(--color-bg)" stroke="var(--color-accent)" stroke-width="4"/><path d="M20 34 L29 43 L45 23" fill="none" stroke="var(--color-accent-2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:#cde3ea; margin-bottom:14px; font-feature-settings:'tnum' 1;">[NOME DO CLUBE] · [CIDADE-UF]</span>
+    <div style="position: relative; z-index: 1; padding: clamp(96px,12vw,128px) clamp(20px,5vw,72px) clamp(40px,6vw,64px); color: #f7f8fa; max-width: 720px; background-color: #0A141800;">
+      <img src="uploads/img/logo.webp" width="72" height="72" alt="Logo Allianz Arena" decoding="async" style="flex-shrink:0; margin-bottom:20px; border-radius:50%; object-fit:cover;">
+      <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:#b4d1f4; margin-bottom:14px; font-feature-settings:'tnum' 1;">ALLIANZ ARENA · VARGINHA-MG</span>
 <h1 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(34px,5.2vw,58px); line-height:1.1; letter-spacing:-0.02em; margin:0;"><span style="display:block; font-size:0.6em; line-height:1.3; min-height:1.3em;">O que você deseja? <span style="color:var(--color-accent);">{{ typedText }}<span style="display:inline-block; width:2px; height:0.8em; background:var(--color-accent); margin-left:4px; vertical-align:-0.1em; opacity:{{ cursorOpacity }};"></span></span></span><span style="display:block;">Seja bem-vindo</span></h1>
       
       <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:24px;">
-        <a href="{{ ctaHref }}" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:16px; padding:14px 32px; color:var(--color-bg); white-space:nowrap; background:linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-600) 100%); border-radius:999px; box-shadow:0 6px 18px rgba(226,87,42,0.45); transition:transform 0.15s ease, box-shadow 0.15s ease;" style-hover="transform:translateY(-2px); box-shadow:0 10px 24px rgba(226,87,42,0.55);" style-active="transform:translateY(0) scale(0.96); box-shadow:0 3px 10px rgba(226,87,42,0.3);">{{ ctaLabel }}</a>
+        <a href="{{ ctaHref }}" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:16px; padding:14px 32px; color:var(--color-bg); white-space:nowrap; background:linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-600) 100%); border-radius:999px; box-shadow:0 6px 18px rgba(20,110,221,0.45); transition:transform 0.15s ease, box-shadow 0.15s ease;" style-hover="transform:translateY(-2px); box-shadow:0 10px 24px rgba(20,110,221,0.55);" style-active="transform:translateY(0) scale(0.96); box-shadow:0 3px 10px rgba(20,110,221,0.3);">{{ ctaLabel }}</a>
       </div>
     </div>
     <svg class="btc-wave" style="position:absolute; left:0; right:0; bottom:-1px; z-index:1; pointer-events:none;" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0,32 C240,58 480,4 720,20 C960,36 1200,56 1440,26 L1440,60 L0,60 Z" fill="var(--color-bg)"></path></svg>
@@ -129,8 +153,11 @@
     <div>
       <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">Sobre nós</span>
       <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(28px,3.4vw,40px); letter-spacing:-0.015em; margin:0 0 16px; max-width:26ch;">Onde a areia encontra o esporte</h2>
-      <p style="font-size:16px; line-height:1.65; max-width:52ch; color:color-mix(in srgb, var(--color-text) 80%, transparent); margin:0 0 24px;">A [Nome do Clube]&nbsp; é o point de quem quer jogar, treinar e fazer amigos na areia. Quadras cuidadas, iluminação para qualquer horário e uma comunidade que recebe todo mundo de braços abertos.</p>
+      <p style="font-size:16px; line-height:1.65; max-width:52ch; color:color-mix(in srgb, var(--color-text) 80%, transparent); margin:0 0 24px;">A Allianz Arena é o point de quem quer jogar, treinar e fazer amigos na areia ou na grama. Quadra society com certificação FIFA, espaço beach completo, iluminação para qualquer horário e uma comunidade que recebe todo mundo de braços abertos.</p>
       <div style="display:flex; gap:24px; flex-wrap:wrap; border-top:2px solid var(--color-divider); padding-top:20px;">
+        <span style="display:flex; align-items:center; gap:8px; font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:0.06em; text-transform:uppercase;">
+          <span style="width:10px; height:10px; border-radius:50%; background:var(--color-accent-2); box-shadow:0 0 0 3px var(--color-accent-2-100); flex-shrink:0;"></span>Futebol Society
+        </span>
         <span style="display:flex; align-items:center; gap:8px; font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:0.06em; text-transform:uppercase;">
           <span style="width:10px; height:10px; border-radius:50%; background:var(--color-accent); box-shadow:0 0 0 3px var(--color-accent-100); flex-shrink:0;"></span>Beach Tennis
         </span>
@@ -142,32 +169,62 @@
         </span>
       </div>
     </div>
-    <figure style="margin:0;">
-      <image-slot id="sobre-photo" shape="rect" style="width:100%; aspect-ratio:4/3;" placeholder="Foto das quadras"></image-slot>
+    <figure style="margin:0;" aria-label="Fotos do clube">
+      <!-- class="..." direto num custom element (ex.: <image-slot>) vira um atributo
+           morto "classname" nesse runtime, não "class" — por isso o wrapper <div>
+           em vez de colocar a classe no <image-slot> abaixo. -->
+      <div class="btc-sobre-photo-desktop">
+        <div class="btc-carousel" style="position:relative; width:100%; aspect-ratio:4/3;">
+          <img class="btc-carousel-slide" src="uploads/img/quadra-de-areia.webp" alt="Raquete e bola de beach tennis na areia" loading="lazy" decoding="async" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:1; transition:opacity 1s ease;">
+          <img class="btc-carousel-slide" src="uploads/img/quadra-nascerdosol.webp" alt="Quadra society ao pôr do sol na Allianz Arena" loading="lazy" decoding="async" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s ease;">
+        </div>
+      </div>
+      <div class="btc-sobre-carousel-mobile" style="width:100%; aspect-ratio:4/3; overflow:hidden;">
+      <div class="btc-scroll-marquee-track" style="width:max-content; gap:12px; height:100%;">
+        <img src="uploads/img/quadra-areia.webp" alt="Quadra de areia da Allianz Arena" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/quadra-society-01.webp" alt="Partida de futebol society na Allianz Arena" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/quadra-de-areia.webp" alt="Raquete e bola de beach tennis na areia" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/quadra-society-02.webp" alt="Detalhe do gramado do campo society" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/equipe-02.webp" alt="Jogadoras na Allianz Arena" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/quadra-areia-04.webp" alt="Ação de vôlei de praia na Allianz Arena" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/estrutura03.webp" alt="Deck de confraternização com vista para a quadra de areia" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/bolas.webp" alt="Bolas e raquete de beach tennis na areia" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/volei.webp" alt="Partida de vôlei de praia na Allianz Arena" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/quadra-areia.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/quadra-society-01.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/quadra-de-areia.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/quadra-society-02.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/equipe-02.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/quadra-areia-04.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/estrutura03.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/bolas.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+        <img src="uploads/img/volei.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="height:100%; width:auto; aspect-ratio:4/3; max-width:none; object-fit:cover; flex-shrink:0;">
+      </div>
+      </div>
     </figure>
   </section>
 
   <section ref="{{ statsSectionRef }}" aria-label="Clube em números" style="position:relative; overflow:hidden; min-height:320px; padding:clamp(64px,8vw,104px) clamp(20px,5vw,72px); border-top:2px solid var(--color-divider); border-bottom:2px solid var(--color-divider); display:flex; align-items:center;">
     <div style="position:absolute; inset:0; overflow:hidden;">
-      <image-slot id="stats-bg" shape="rect" fit="cover" style="width:100%; height:100%; transform:scale(1.06); filter:saturate(1.15);" placeholder="Foto de beach tennis (fundo)"></image-slot>
+      <image-slot id="stats-bg" shape="rect" fit="cover" src="uploads/img/volei.webp" style="width:100%; height:100%; transform:scale(1.06); filter:saturate(1.15);" placeholder="Foto de beach tennis (fundo)"></image-slot>
     </div>
     <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(8,20,26,0.32) 0%, rgba(8,20,26,0.7) 60%, rgba(8,20,26,0.85) 100%);"></div>
     <div style="position:relative; z-index:1; max-width:1200px; margin:0 auto; width:100%; display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:32px;">
       <div style="opacity:{{ statsOpacity0 }}; transform:translateY({{ statsOffset0 }}px); transition:opacity 0.6s ease, transform 0.6s ease;">
         <p style="font-family:var(--font-heading); font-weight:800; font-size:clamp(32px,3.4vw,46px); color:var(--color-accent); margin:0;">{{ countQuadras }}</p>
-        <p style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(243,238,224,0.85); margin:8px 0 0;">Quadras de areia</p>
+        <p style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(247,248,250,0.85); margin:8px 0 0;">Quadras</p>
       </div>
       <div style="opacity:{{ statsOpacity1 }}; transform:translateY({{ statsOffset1 }}px); transition:opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;">
         <p style="font-family:var(--font-heading); font-weight:800; font-size:clamp(32px,3.4vw,46px); color:var(--color-accent); margin:0;">{{ countModalidades }}</p>
-        <p style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(243,238,224,0.85); margin:8px 0 0;">Modalidades</p>
+        <p style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(247,248,250,0.85); margin:8px 0 0;">Modalidades</p>
       </div>
       <div style="opacity:{{ statsOpacity2 }}; transform:translateY({{ statsOffset2 }}px); transition:opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;">
         <p style="font-family:var(--font-heading); font-weight:800; font-size:clamp(32px,3.4vw,46px); color:var(--color-accent); margin:0;">{{ countAlunos }}</p>
-        <p style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(243,238,224,0.85); margin:8px 0 0;">Alunos satisfeitos</p>
+        <p style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(247,248,250,0.85); margin:8px 0 0;">Alunos satisfeitos</p>
       </div>
       <div style="opacity:{{ statsOpacity3 }}; transform:translateY({{ statsOffset3 }}px); transition:opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;">
         <p style="font-family:var(--font-heading); font-weight:800; font-size:clamp(32px,3.4vw,46px); color:var(--color-accent); margin:0;">{{ countEventos }}</p>
-        <p style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(243,238,224,0.85); margin:8px 0 0;">Eventos por ano</p>
+        <p style="font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(247,248,250,0.85); margin:8px 0 0;">Eventos por ano</p>
       </div>
     </div>
   </section>
@@ -179,7 +236,7 @@
       <div class="elev-sm" style="position:relative; background:var(--color-bg); border:1px solid var(--color-divider); padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%; transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;" style-hover="transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--color-accent);">
         <span style="position:absolute; top:16px; right:18px; z-index:1; font-family:var(--font-heading); font-weight:800; font-size:13px; color:#fff; background:rgba(10,20,24,0.5); padding:2px 8px; font-feature-settings:'tnum' 1;">01</span>
         <div style="width:100%; aspect-ratio:4/3; overflow:hidden; transition:transform 0.4s ease;" style-hover="transform:scale(1.06);">
-          <image-slot id="servico-aulas-photo" shape="rect" style="width:100%; height:100%;" placeholder="Foto de aulas"></image-slot>
+          <image-slot id="servico-aulas-photo" shape="rect" fit="cover" src="uploads/img/equipe-02.webp" style="width:100%; height:100%;" placeholder="Foto de aulas"></image-slot>
         </div>
         <div style="padding:20px 24px 28px; flex:1; display:flex; flex-direction:column;">
           <h3 class="card-title">Aulas particulares e em grupo</h3>
@@ -189,7 +246,10 @@
       <div class="elev-sm" style="position:relative; background:var(--color-bg); border:1px solid var(--color-divider); padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%; transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;" style-hover="transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--color-accent-2);">
         <span style="position:absolute; top:16px; right:18px; z-index:1; font-family:var(--font-heading); font-weight:800; font-size:13px; color:#fff; background:rgba(10,20,24,0.5); padding:2px 8px; font-feature-settings:'tnum' 1;">02</span>
         <div style="width:100%; aspect-ratio:4/3; overflow:hidden; transition:transform 0.4s ease;" style-hover="transform:scale(1.06);">
-          <image-slot id="servico-aluguel-photo" shape="rect" style="width:100%; height:100%;" placeholder="Foto de aluguel de quadra"></image-slot>
+          <div class="btc-carousel" style="position:relative; width:100%; height:100%;">
+            <img class="btc-carousel-slide" src="uploads/img/quadra-areia.webp" alt="Quadra de areia da Allianz Arena" loading="lazy" decoding="async" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:1; transition:opacity 1s ease;">
+            <img class="btc-carousel-slide" src="uploads/img/quadra-futebol.webp" alt="Partida de futebol society noturna na Allianz Arena" loading="lazy" decoding="async" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s ease;">
+          </div>
         </div>
         <div style="padding:20px 24px 28px; flex:1; display:flex; flex-direction:column;">
           <h3 class="card-title">Aluguel de quadra</h3>
@@ -199,17 +259,22 @@
       <div class="elev-sm" style="position:relative; background:var(--color-bg); border:1px solid var(--color-divider); padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%; transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;" style-hover="transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--color-accent);">
         <span style="position:absolute; top:16px; right:18px; z-index:1; font-family:var(--font-heading); font-weight:800; font-size:13px; color:#fff; background:rgba(10,20,24,0.5); padding:2px 8px; font-feature-settings:'tnum' 1;">03</span>
         <div style="width:100%; aspect-ratio:4/3; overflow:hidden; transition:transform 0.4s ease;" style-hover="transform:scale(1.06);">
-          <image-slot id="servico-eventos-photo" shape="rect" style="width:100%; height:100%;" placeholder="Foto de evento/torneio"></image-slot>
+          <div class="btc-carousel" style="position:relative; width:100%; height:100%;">
+            <img class="btc-carousel-slide" src="uploads/img/evento-corporativo.webp" alt="Confraternização corporativa na Allianz Arena" loading="lazy" decoding="async" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:1; transition:opacity 1s ease;">
+            <img class="btc-carousel-slide" src="uploads/img/estrutura-festas.webp" alt="Espaço de confraternização com mesas, ao lado do campo society" loading="lazy" decoding="async" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s ease;">
+            <img class="btc-carousel-slide" src="uploads/img/estrutura-evento2.webp" alt="Área coberta de confraternização com mesas e bancos" loading="lazy" decoding="async" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s ease;">
+            <img class="btc-carousel-slide" src="uploads/img/estrutura03.webp" alt="Deck de confraternização com vista para a quadra de areia" loading="lazy" decoding="async" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s ease;">
+          </div>
         </div>
         <div style="padding:20px 24px 28px; flex:1; display:flex; flex-direction:column;">
-          <h3 class="card-title">Eventos e torneios</h3>
-          <p class="card-body">Torneios abertos, confraternizações e eventos privados com estrutura completa de arbitragem e som.</p>
+          <h3 class="card-title">Eventos e confraternizações</h3>
+          <p class="card-body">Do evento corporativo à festa de aniversário: alugue só o espaço de confraternização com churrasqueira, a quadra de areia, o campo society, ou toda a estrutura para eventos maiores. Para cada necessidade, uma solução. Traga seu time, sua turma ou sua família.</p>
         </div>
       </div>
       <div class="elev-sm" style="position:relative; background:var(--color-bg); border:1px solid var(--color-divider); padding:0; overflow:hidden; display:flex; flex-direction:column; height:100%; transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;" style-hover="transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--color-accent-2);">
         <span style="position:absolute; top:16px; right:18px; z-index:1; font-family:var(--font-heading); font-weight:800; font-size:13px; color:#fff; background:rgba(10,20,24,0.5); padding:2px 8px; font-feature-settings:'tnum' 1;">04</span>
         <div style="width:100%; aspect-ratio:4/3; overflow:hidden; transition:transform 0.4s ease;" style-hover="transform:scale(1.06);">
-          <image-slot id="servico-festas-photo" shape="rect" style="width:100%; height:100%;" placeholder="Foto de festa de aniversário"></image-slot>
+          <image-slot id="servico-festas-photo" shape="rect" fit="cover" src="uploads/img/aniversario-infantil.webp" style="width:100%; height:100%;" placeholder="Foto de festa de aniversário"></image-slot>
         </div>
         <div style="padding:20px 24px 28px; flex:1; display:flex; flex-direction:column;">
           <h3 class="card-title">Festas de aniversário</h3>
@@ -221,13 +286,50 @@
 
   <section class="btc-two-col btc-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); max-width:1200px; margin:0 auto; display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr); gap:48px; align-items:center; border-top:2px solid var(--color-divider);">
     <figure class="btc-team-photo" style="margin:0; order:2;">
-      <image-slot id="team-photo" shape="rect" fit="cover" style="width:100%; aspect-ratio:4/3;" placeholder="Foto da equipe de instrutores"></image-slot>
+      <image-slot id="team-photo" shape="rect" fit="cover" src="uploads/img/quadra-areia-05.webp" style="width:100%; aspect-ratio:4/5;" placeholder="Foto da equipe de instrutores"></image-slot>
     </figure>
     <div class="btc-team-copy" style="order:1;">
       <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">Nossa equipe</span>
       <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(26px,3vw,36px); letter-spacing:-0.015em; margin:0 0 16px; max-width:26ch;">Instrutores prontos para te ensinar</h2>
       <p style="font-size:16px; line-height:1.65; max-width:50ch; color:color-mix(in srgb, var(--color-text) 80%, transparent); margin:0;">Nossas aulas de beach tennis, vôlei e futevôlei combinam diversão ao sol com treino técnico de verdade. Professores certificados acompanham cada turma, do primeiro saque à competição.</p>
     </div>
+  </section>
+
+  <section id="app-replay" class="btc-two-col btc-reveal" style="padding:clamp(48px,6vw,88px) clamp(20px,5vw,72px); max-width:1200px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr); gap:48px; align-items:center; background:var(--color-surface); border-top:2px solid var(--color-divider); border-bottom:2px solid var(--color-divider);">
+    <div>
+      <span style="display:block; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-700); margin-bottom:14px;">App do clube</span>
+      <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(28px,3.4vw,40px); letter-spacing:-0.015em; margin:0 0 16px; max-width:26ch;">Fez uma jogada digna de replay?</h2>
+      <p style="font-size:16px; line-height:1.65; max-width:50ch; color:color-mix(in srgb, var(--color-text) 80%, transparent); margin:0 0 28px;">Baixe o app Lance Replay e encontre o vídeo da sua partida direto no celular. Poste nos stories marcando <strong>@allianzarenasociety</strong> que a gente compartilha.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="https://apps.apple.com/br/app/lance-replay/id6450366188" target="_blank" rel="noopener" aria-label="Baixar na App Store" style="display:inline-flex; align-items:center; gap:10px; background:#000; color:#fff; border-radius:10px; padding:8px 16px; text-decoration:none; line-height:1.15;" style-hover="opacity:0.85;">
+          <svg width="17" height="22" viewBox="0 0 384 512" style="flex-shrink:0;" aria-hidden="true">
+            <path fill="#fff" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"></path>
+          </svg>
+          <span>
+            <span style="display:block; font-size:10px;">Baixar na</span>
+            <span style="display:block; font-size:17px; font-weight:600; font-family:var(--font-heading); letter-spacing:-0.01em;">App Store</span>
+          </span>
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=br.com.lancereplay&hl=pt_BR" target="_blank" rel="noopener" aria-label="Disponível no Google Play" style="display:inline-flex; align-items:center; gap:10px; background:#000; color:#fff; border-radius:10px; padding:8px 16px; text-decoration:none; line-height:1.15;" style-hover="opacity:0.85;">
+          <svg width="22" height="22" viewBox="0 0 24 24" style="flex-shrink:0;" aria-hidden="true">
+            <polygon points="6,3 6,12 18,12" fill="#00D2FF"></polygon>
+            <polygon points="6,3 18,12 20,12" fill="#FF3333"></polygon>
+            <polygon points="6,21 6,12 18,12" fill="#00E28A"></polygon>
+            <polygon points="6,21 18,12 20,12" fill="#FFD400"></polygon>
+          </svg>
+          <span>
+            <span style="display:block; font-size:10px;">Disponível no</span>
+            <span style="display:block; font-size:17px; font-weight:600; font-family:var(--font-heading); letter-spacing:-0.01em;">Google Play</span>
+          </span>
+        </a>
+      </div>
+    </div>
+    <figure style="margin:0;">
+      <div class="btc-carousel" style="position:relative; width:100%; aspect-ratio:4/5; overflow:hidden;">
+        <img class="btc-carousel-slide" src="uploads/img/app-replay.webp" alt="App Lance Replay aberto no celular, na quadra" loading="lazy" decoding="async" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:1; transition:opacity 1s ease;">
+        <img class="btc-carousel-slide" src="uploads/img/corte-replay.webp" alt="Lance capturado pelo Lance Replay na quadra de areia" loading="lazy" decoding="async" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s ease;">
+      </div>
+    </figure>
   </section>
 
   <sc-if value="{{ showTestimonials }}" hint-placeholder-val="{{ true }}">
@@ -270,18 +372,20 @@
 
   <section class="btc-location-section" style="position:relative; height:clamp(420px,62vw,640px); width:100%; overflow:hidden; background:var(--color-surface);">
     <div class="btc-location-map" style="position:absolute; inset:0; width:100%; height:100%;">
-      <iframe title="Mapa — [Endereço da quadra, número], [Bairro, Cidade - UF]" src="https://www.google.com/maps?q=SEU_ENDERECO_AQUI&output=embed" style="border:0; width:100%; height:100%; display:block;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen="{{ true }}"></iframe>
+      <iframe title="Mapa — Avenida Plínio Salgado, 820, Vila Murad, Varginha - MG" src="https://www.google.com/maps?q=Avenida%20Pl%C3%ADnio%20Salgado%2C%20820%20-%20Vila%20Murad%2C%20Varginha%2C%20MG&output=embed" style="border:0; width:100%; height:100%; display:block;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen="{{ true }}"></iframe>
     </div>
-    <div class="btc-location-card" style="position:absolute; top:6%; left:50%; transform:translateX(-50%); width:min(680px,92%); display:grid; grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr); background:var(--color-text); box-shadow:var(--shadow-lg);">
-      <image-slot id="location-photo" shape="rect" style="width:100%; height:100%; min-height:220px;" placeholder="Foto da fachada / quadras"></image-slot>
+    <div style="position:absolute; inset:0; background:rgba(8,12,18,0.55); pointer-events:none;"></div>
+    <div class="btc-location-card" style="position:absolute; z-index:1; top:6%; left:50%; transform:translateX(-50%); width:min(680px,92%); display:grid; grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr); background:var(--color-text); border:3px solid; border-image:linear-gradient(to bottom, var(--color-accent) 50%, var(--color-accent-2) 50%) 1; box-shadow:var(--shadow-lg);">
+      <image-slot id="location-photo" shape="rect" fit="cover" src="uploads/img/fachada.webp" style="width:100%; height:100%; min-height:220px;" placeholder="Foto da fachada / quadras"></image-slot>
       <div style="padding:clamp(24px,3vw,36px); color:var(--color-bg); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:10px; height:100%;">
-        <svg viewBox="0 0 64 64" width="44" height="44" style="flex-shrink:0; margin-bottom:6px;" aria-label="Logo do clube" role="img"><circle cx="32" cy="32" r="30" fill="var(--color-bg)" stroke="var(--color-accent)" stroke-width="4"/><path d="M20 34 L29 43 L45 23" fill="none" stroke="var(--color-accent-2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <img src="uploads/img/logo.webp" width="44" height="44" alt="Logo Allianz Arena" loading="lazy" decoding="async" style="flex-shrink:0; margin-bottom:6px; border-radius:50%; object-fit:cover;">
         <span style="display:block; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--color-accent-300);">Endereço</span>
-        <p style="font-size:17px; line-height:1.5; margin:0; font-weight:600;">[Endereço da quadra, número]</p>
-        <p style="font-size:14px; line-height:1.5; margin:0; color:rgba(243,238,224,0.75);">[Bairro, Cidade - UF]</p>
-        <p style="font-size:13px; line-height:1.5; margin:0 0 10px; color:rgba(243,238,224,0.55);">CEP: [00000-000]</p>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=SEU_ENDERECO_AQUI" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center;">Pegue a localização →</a>
+        <p style="font-size:17px; line-height:1.5; margin:0; font-weight:600;">Avenida Plínio Salgado, 820</p>
+        <p style="font-size:14px; line-height:1.5; margin:0; color:rgba(247,248,250,0.75);">Vila Murad, Varginha - MG</p>
+        <p style="font-size:13px; line-height:1.5; margin:0 0 10px; color:rgba(247,248,250,0.55);">CEP: 37014-550</p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Avenida%20Pl%C3%ADnio%20Salgado%2C%20820%20-%20Vila%20Murad%2C%20Varginha%2C%20MG" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center;">Pegue a localização →</a>
       </div>
+      <div style="position:absolute; left:50%; bottom:-19px; transform:translateX(-50%); width:0; height:0; border-left:19px solid transparent; border-right:19px solid transparent; border-top:19px solid var(--color-accent-2);"></div>
       <div class="btc-location-pointer" style="position:absolute; left:50%; bottom:-16px; transform:translateX(-50%); width:0; height:0; border-left:16px solid transparent; border-right:16px solid transparent; border-top:16px solid var(--color-text);"></div>
     </div>
   </section>
@@ -296,7 +400,7 @@
         <div class="btc-form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
           <div class="field">
             <label for="contact-nome">Nome</label>
-            <input id="contact-nome" class="input" type="text" value="{{ contactForm.nome }}" onChange="{{ onContactField('nome') }}" required="{{ true }}">
+            <input id="contact-nome" class="input" type="text" value="{{ contactForm.nome }}" onChange="{{ onNomeChange }}" required="{{ true }}">
           </div>
           <div class="field">
             <label for="contact-telefone">Telefone</label>
@@ -305,38 +409,39 @@
         </div>
         <div class="field">
           <label for="contact-email">E-mail</label>
-          <input id="contact-email" class="input" type="email" value="{{ contactForm.email }}" onChange="{{ onContactField('email') }}">
+          <input id="contact-email" class="input" type="email" value="{{ contactForm.email }}" onChange="{{ onEmailChange }}">
         </div>
         <div class="field">
           <label for="contact-mensagem">Mensagem</label>
-          <textarea id="contact-mensagem" class="input" rows="4" style="resize:vertical; font-family:inherit;" value="{{ contactForm.mensagem }}" onChange="{{ onContactField('mensagem') }}" required="{{ true }}"></textarea>
+          <textarea id="contact-mensagem" class="input" rows="4" style="resize:vertical; font-family:inherit;" value="{{ contactForm.mensagem }}" onChange="{{ onMensagemChange }}" required="{{ true }}"></textarea>
         </div>
         <button type="submit" class="btn btn-primary btn-block" style="justify-content:center; background:linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-600) 100%); border-radius:999px; padding:14px 0; color:var(--color-bg);">Enviar mensagem pelo WhatsApp</button>
       </form>
       <div style="display:grid; gap:20px;">
         <div>
           <p style="font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; color:var(--color-accent-700); margin:0 0 6px;">Horário</p>
-          <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent); white-space:nowrap;">Seg a Dom · 7h às 23h</p>
+          <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent); white-space:nowrap;">Seg a Sex · 8h às 00h</p>
+          <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent); white-space:nowrap;">Sáb e Dom · 7h às 20h</p>
         </div>
         <a href="{{ whatsappHref }}" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:16px; text-decoration:none; color:var(--color-text);" style-hover="opacity:0.7;">
           <svg width="40" height="40" viewBox="0 0 32 32" fill="#25D366" style="flex-shrink:0;"><path d="M16.001 3C9.099 3 3.5 8.6 3.5 15.5c0 2.55.75 4.92 2.03 6.9L3 29l6.77-2.48A12.4 12.4 0 0016 28c6.9 0 12.5-5.6 12.5-12.5S22.9 3 16 3zm0 22.7c-2.13 0-4.13-.58-5.86-1.6l-.42-.25-4.22 1.55 1.53-4.1-.27-.42a10.16 10.16 0 01-1.66-5.55C5.11 9.83 9.94 5 16 5s10.89 4.83 10.89 10.5S22.06 25.7 16 25.7z"></path><path d="M22.3 18.73c-.34-.17-2-.99-2.31-1.1-.31-.11-.53-.17-.76.17-.22.34-.86 1.1-1.05 1.32-.19.22-.39.25-.72.08-1.94-.97-3.21-1.73-4.49-3.92-.34-.58.34-.54.97-1.8.11-.22.06-.41-.03-.58-.09-.17-.66-1.6-.91-2.19-.24-.58-.49-.5-.68-.5-.17-.01-.38-.01-.58-.01-.2 0-.53.08-.81.39-.28.31-1.06 1.04-1.06 2.53s1.09 2.94 1.24 3.14c.15.2 2.06 3.15 5.06 4.29 2.51.95 3.02.76 3.57.71.55-.05 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.3-.2-.63-.34z"></path></svg>
           <div>
             <p style="font-family:var(--font-heading); font-weight:800; font-size:15px; margin:0 0 3px; color:var(--color-text);">WhatsApp</p>
-            <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent);">(00) 00000-0000</p>
+            <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent);">(35) 99997-1276</p>
           </div>
         </a>
         <a href="{{ instagramHref }}" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:16px; text-decoration:none; color:var(--color-text);" style-hover="opacity:0.7;">
           <svg width="38" height="38" viewBox="0 0 24 24" style="flex-shrink:0;"><defs><radialGradient id="igGrad" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"></stop><stop offset="5%" stop-color="#fdf497"></stop><stop offset="45%" stop-color="#fd5949"></stop><stop offset="60%" stop-color="#d6249f"></stop><stop offset="90%" stop-color="#285AEB"></stop></radialGradient></defs><rect x="2" y="2" width="20" height="20" rx="5.5" fill="url(#igGrad)"></rect><circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" stroke-width="1.8"></circle><circle cx="17.2" cy="6.8" r="0.9" fill="#fff"></circle></svg>
           <div>
             <p style="font-family:var(--font-heading); font-weight:800; font-size:15px; margin:0 0 3px; color:var(--color-text);">Instagram</p>
-            <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent);">@seu_instagram</p>
+            <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent);">@allianzarenasociety</p>
           </div>
         </a>
         <a href="{{ facebookHref }}" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:16px; text-decoration:none; color:var(--color-text);" style-hover="opacity:0.7;">
           <svg width="38" height="38" viewBox="0 0 24 24" style="flex-shrink:0;"><rect x="2" y="2" width="20" height="20" rx="5.5" fill="#1877F2"></rect><path d="M15.5 8.5h-1.3c-.5 0-.7.25-.7.75V10.5h2l-.25 2h-1.75v6h-2.2v-6H9.5v-2h1.8V8.9c0-1.65.9-2.9 2.6-2.9h1.6v2.5z" fill="#fff"></path></svg>
           <div>
             <p style="font-family:var(--font-heading); font-weight:800; font-size:15px; margin:0 0 3px; color:var(--color-text);">Facebook</p>
-            <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent);">[Nome do Clube]</p>
+            <p style="font-size:15px; line-height:1.6; margin:0; color:color-mix(in srgb, var(--color-text) 78%, transparent);">Allianz Arena</p>
           </div>
         </a>
       </div>
@@ -346,8 +451,8 @@
   
 
   <footer style="border-top:2px solid var(--color-divider); padding:32px clamp(20px,5vw,72px); max-width:1200px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center;">
-    <svg viewBox="0 0 64 64" width="48" height="48" style="flex-shrink:0;" aria-label="Logo do clube" role="img"><circle cx="32" cy="32" r="30" fill="var(--color-bg)" stroke="var(--color-accent)" stroke-width="4"/><path d="M20 34 L29 43 L45 23" fill="none" stroke="var(--color-accent-2)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <p style="font-size:13px; color:color-mix(in srgb, var(--color-text) 70%, transparent); margin:0;">© 2026 [Nome do Clube] | Todos os direitos reservados.</p>
+    <img src="uploads/img/logo.webp" width="48" height="48" alt="Logo Allianz Arena" loading="lazy" decoding="async" style="flex-shrink:0; border-radius:50%; object-fit:cover;">
+    <p style="font-size:13px; color:color-mix(in srgb, var(--color-text) 70%, transparent); margin:0;">© 2026 Allianz Arena | Todos os direitos reservados.</p>
   </footer>
 
   <a href="{{ whatsappHref }}" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" style="position:fixed; bottom:24px; right:24px; z-index:50; width:60px; height:60px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(0,0,0,0.3); transition:transform 0.15s ease, box-shadow 0.15s ease;" style-hover="transform:scale(1.08); box-shadow:0 10px 24px rgba(0,0,0,0.4);" style-active="transform:scale(0.94);">
@@ -360,12 +465,21 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280},&quot;showTestimonials&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo&quot;},&quot;ctaChannel&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;whatsapp&quot;,&quot;options&quot;:[&quot;whatsapp&quot;,&quot;telefone&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contato&quot;}}">
 class Component extends DCLogic {
   heroVideoRef = React.createRef();
-  typedWords = ['Vôlei', 'Futevôlei', 'Beach Tennis'];
+  typedWords = ['Futebol', 'Vôlei', 'Futevôlei', 'Beach Tennis'];
   statsSectionRef = React.createRef();
-  statsTargets = { quadras: 1, modalidades: 3, alunos: 1200, eventos: 80 };
+  statsTargets = { quadras: 2, modalidades: 4, alunos: 1200, eventos: 80 };
   state = { typedText: '', cursorOn: true, statsPlayed: false, countQuadras: 0, countModalidades: 0, countAlunos: 0, countEventos: 0, contactForm: { nome: '', telefone: '', email: '', mensagem: '' } };
-  onContactField(field) {
-    return (e) => this.setState(s => ({ contactForm: { ...s.contactForm, [field]: e.target.value } }));
+  onNomeChange(e) {
+    const value = e.target.value;
+    this.setState(s => ({ contactForm: { ...s.contactForm, nome: value } }));
+  }
+  onEmailChange(e) {
+    const value = e.target.value;
+    this.setState(s => ({ contactForm: { ...s.contactForm, email: value } }));
+  }
+  onMensagemChange(e) {
+    const value = e.target.value;
+    this.setState(s => ({ contactForm: { ...s.contactForm, mensagem: value } }));
   }
   onContactPhoneChange(e) {
     const digits = e.target.value.replace(/\D/g, '').slice(0, 11);
@@ -380,13 +494,13 @@ class Component extends DCLogic {
     e.preventDefault();
     const f = this.state.contactForm;
     const lines = [
-      'Olá! Vim pelo site do [Nome do Clube].',
+      'Olá! Vim pelo site da Allianz Arena.',
       'Nome: ' + f.nome,
       'Telefone: ' + f.telefone,
       f.email ? ('E-mail: ' + f.email) : null,
       'Mensagem: ' + f.mensagem
     ].filter(Boolean).join('\n');
-    window.open('https://wa.me/SEUNUMERODEWHATSAPP?text=' + encodeURIComponent(lines), '_blank');
+    window.open('https://wa.me/5535999971276?text=' + encodeURIComponent(lines), '_blank');
   }
   animateStats() {
     if (this.state.statsPlayed) return;
@@ -415,13 +529,20 @@ class Component extends DCLogic {
     }
     if (this.heroVideoRef.current) {
       const v = this.heroVideoRef.current;
-      v.muted = true;
-      v.loop = true;
-      v.addEventListener('ended', () => { v.currentTime = 0; v.play(); });
-      const tryPlay = () => v.play().catch(() => {});
-      tryPlay();
-      v.addEventListener('canplay', tryPlay, { once: true });
-      v.addEventListener('loadeddata', tryPlay, { once: true });
+      const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+      // Sinal ruim ou "economizar dados": fica só no poster, não baixa o vídeo.
+      const skipVideo = conn && (conn.saveData || /2g/.test(conn.effectiveType || ''));
+      // Desktop usa a foto (.btc-hero-photo), não o vídeo — não baixa o mp4 à toa.
+      const isMobileLayout = window.matchMedia('(max-width: 860px)').matches;
+      if (!skipVideo && isMobileLayout) {
+        v.muted = true;
+        v.loop = true;
+        v.addEventListener('ended', () => { v.currentTime = 0; v.play(); });
+        const tryPlay = () => v.play().catch(() => {});
+        tryPlay();
+        v.addEventListener('canplay', tryPlay, { once: true });
+        v.addEventListener('loadeddata', tryPlay, { once: true });
+      }
     }
     this.wordIndex = 0;
     this.charIndex = 0;
@@ -441,10 +562,69 @@ class Component extends DCLogic {
       }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
       revealTargets.forEach((el) => this.revealObserver.observe(el));
     }
+
+    const scrollTrack = document.querySelector('.btc-scroll-marquee-track');
+    if (scrollTrack) {
+      // Rola pra baixo = faixa avança; rola pra cima = faixa recua.
+      // Loop sem costura: offset sempre dentro de [0, metade da largura) —
+      // a segunda metade da faixa é a primeira repetida (ver HTML).
+      // "current" persegue "target" a cada frame (lerp) pra suavizar —
+      // sem isso o transform pula direto pro valor do evento de scroll.
+      // Também soma um avanço automático constante por frame, então a
+      // faixa continua rodando sozinha mesmo parado — o scroll só acelera
+      // ou inverte esse avanço.
+      const reduceMotionMarquee = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const autoAdvance = reduceMotionMarquee ? 0 : 0.6;
+      let target = 0;
+      let current = 0;
+      let lastY = window.scrollY;
+      const onScroll = () => {
+        const y = window.scrollY;
+        const delta = y - lastY;
+        lastY = y;
+        const halfWidth = scrollTrack.scrollWidth / 2;
+        if (halfWidth > 0) target = ((target + delta) % halfWidth + halfWidth) % halfWidth;
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      const tick = () => {
+        const halfWidth = scrollTrack.scrollWidth / 2;
+        if (halfWidth > 0) {
+          target = (target + autoAdvance) % halfWidth;
+          let diff = target - current;
+          if (diff > halfWidth / 2) diff -= halfWidth;
+          if (diff < -halfWidth / 2) diff += halfWidth;
+          current = ((current + diff * 0.12) % halfWidth + halfWidth) % halfWidth;
+          scrollTrack.style.transform = 'translateX(' + (-current) + 'px)';
+        }
+        this._scrollMarqueeRaf = requestAnimationFrame(tick);
+      };
+      this._scrollMarqueeRaf = requestAnimationFrame(tick);
+      this._removeScrollMarquee = () => {
+        window.removeEventListener('scroll', onScroll);
+        cancelAnimationFrame(this._scrollMarqueeRaf);
+      };
+    }
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.carouselTimers = [];
+    if (!reduceMotion) {
+      document.querySelectorAll('.btc-carousel').forEach((carousel) => {
+        const slides = carousel.querySelectorAll('.btc-carousel-slide');
+        if (slides.length < 2) return;
+        let index = 0;
+        this.carouselTimers.push(setInterval(() => {
+          slides[index].style.opacity = '0';
+          index = (index + 1) % slides.length;
+          slides[index].style.opacity = '1';
+        }, 4000));
+      });
+    }
   }
   componentWillUnmount() {
     clearTimeout(this.typingTimer);
     clearInterval(this.cursorTimer);
+    (this.carouselTimers || []).forEach((t) => clearInterval(t));
+    if (this._removeScrollMarquee) this._removeScrollMarquee();
     if (this.statsObserver) this.statsObserver.disconnect();
     if (this.revealObserver) this.revealObserver.disconnect();
   }
@@ -464,17 +644,19 @@ class Component extends DCLogic {
   renderVals() {
     const showTestimonials = this.props.showTestimonials ?? true;
     const ctaChannel = this.props.ctaChannel ?? 'whatsapp';
-    const whatsappHref = 'https://wa.me/SEUNUMERODEWHATSAPP?text=' + encodeURIComponent('Oi! Quero saber mais sobre o [Nome do Clube].');
-    const instagramHref = 'https://www.instagram.com/SEU_INSTAGRAM/';
-    const facebookHref = 'https://www.facebook.com/SEU_FACEBOOK/';
-    const telHref = 'tel:+SEUNUMERODEWHATSAPP';
+    const whatsappHref = 'https://wa.me/5535999971276?text=' + encodeURIComponent('Oi! Quero saber mais sobre a Allianz Arena.');
+    const instagramHref = 'https://www.instagram.com/allianzarenasociety/';
+    const facebookHref = 'https://www.facebook.com/societyallianzarena/';
+    const telHref = 'tel:+5535999971276';
     const ctaLabel = ctaChannel === 'telefone' ? 'Ligar agora' : 'Reserve agora';
     const ctaHref = ctaChannel === 'telefone' ? telHref : whatsappHref;
     const played = this.state.statsPlayed;
     return {
       showTestimonials, ctaLabel, ctaHref, whatsappHref, instagramHref, facebookHref, heroVideoRef: this.heroVideoRef,
       contactForm: this.state.contactForm,
-      onContactField: (field) => this.onContactField(field),
+      onNomeChange: (e) => this.onNomeChange(e),
+      onEmailChange: (e) => this.onEmailChange(e),
+      onMensagemChange: (e) => this.onMensagemChange(e),
       onContactPhoneChange: (e) => this.onContactPhoneChange(e),
       onContactSubmit: (e) => this.onContactSubmit(e),
       typedText: this.state.typedText, cursorOpacity: this.state.cursorOn ? 1 : 0,
