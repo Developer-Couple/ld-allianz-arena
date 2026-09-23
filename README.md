@@ -50,6 +50,46 @@ contexto:
 Prefixo das classes CSS próprias do layout: `btc-` (Beach Tennis Club) —
 genérico de propósito, não é o nome de nenhum cliente.
 
+## Arquivos gerados pela ferramenta — não mover nem renomear
+
+A raiz do projeto mistura o template com infraestrutura gerada pela
+ferramenta de preview/doc do Claude Code (dc-runtime). Esses arquivos
+precisam ficar como irmãos do `index.html`, na raiz, com esses nomes
+exatos — mover ou renomear quebra o preview:
+
+- `_ds/modernist-<uuid>/` (`styles.css` + `_ds_bundle.js`) — bundle do
+  design system, gerado pela ferramenta.
+- `doc-page.js`, `image-slot.js` — starter scaffolds copiados pela
+  ferramenta (`copy_starter_component`).
+- `support.js` — gerado a partir de `dc-runtime/src/*.ts` ("do not
+  edit" no próprio arquivo).
+- `.image-slots.state.json` — sidecar de estado dos `<image-slot>`;
+  precisa ser sibling do HTML porque a leitura é via fetch relativo ao
+  documento.
+
+O que é de fato nosso e pode ser reorganizado livremente: `scripts/`
+(tooling de dev) e `uploads/` (mídia do cliente).
+
+## Mídia — otimização obrigatória antes de usar
+
+O site é aberto por leads em conexão de internet ruim, então toda imagem e
+vídeo em `uploads/` precisa estar otimizado antes de entrar no `index.html`:
+
+- **Imagens**: sempre WebP (`cwebp -q 78 -m 6`), nunca JPEG/PNG cru. Logo e
+  ícones passam por `sips -Z <lado maior>` antes, pra não carregar um PNG
+  gigante virando WebP gigante.
+- **Vídeo**: H.264 sem áudio (`-an`), `-movflags +faststart`, resolução e
+  CRF ajustados pro uso (ex.: vídeo de fundo mobile não precisa de mais que
+  540×960 / CRF 32) — ver `uploads/video/hero-mobile.mp4` como referência
+  (17,7MB → 3,6MB).
+- Os arquivos originais (não otimizados) ficam em `uploads/_originals/`,
+  gitignored — nunca aponte o `index.html` pra lá.
+- `<image-slot>` já carrega o `<img>` interno com `loading="lazy"` (patch
+  em `image-slot.js`, ver comentário no arquivo — precisa ser reaplicado
+  se o scaffold for recopiado pela ferramenta). Vídeo de fundo deve usar
+  `preload="metadata"` + `poster` e só iniciar o carregamento/play quando
+  entrar no viewport.
+
 ## Fluxo com `git worktree` pra cada novo prospect
 
 Este repo fica só com o template genérico na branch `main`. Pra cada lead

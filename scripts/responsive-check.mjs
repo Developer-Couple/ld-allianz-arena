@@ -9,12 +9,13 @@ import { chromium } from 'playwright';
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const OUT_DIR = join(ROOT, '.screenshots');
 const PORT = 8935;
-const HTML_FILE = 'beach-tennis-template.dc.html';
+const HTML_FILE = 'index.html';
 
 const MIME = {
   '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
   '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
   '.mp4': 'video/mp4', '.json': 'application/json', '.svg': 'image/svg+xml',
+  '.webp': 'image/webp',
 };
 
 const BREAKPOINTS = [
@@ -48,7 +49,9 @@ async function main() {
 
   for (const bp of BREAKPOINTS) {
     const page = await browser.newPage({ viewport: { width: bp.width, height: bp.height } });
-    await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
+    // 'load', não 'networkidle': o vídeo do hero autoplay/loop mantém
+    // requisições de range indo, então a rede nunca fica ociosa.
+    await page.goto(url, { waitUntil: 'load', timeout: 30000 });
     await page.waitForTimeout(500);
 
     const overflow = await page.evaluate(
@@ -59,7 +62,7 @@ async function main() {
     await page.screenshot({ path: join(OUT_DIR, `${bp.name}.png`), fullPage: true });
 
     // Header: também captura o menu mobile aberto, se o hambúrguer estiver visível.
-    const burger = page.locator('.vbt-nav-burger');
+    const burger = page.locator('.btc-nav-burger');
     if (bp.width <= 860 && (await burger.isVisible())) {
       await page.setViewportSize({ width: bp.width, height: 400 });
       await burger.click();
